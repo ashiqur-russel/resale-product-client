@@ -1,10 +1,11 @@
-const setAuthToken = (user) => {
+const setAuthToken = (user, role) => {
   const currentUser = {
-    email: user.email,
+    email: user.email || user,
+    role: role,
   };
 
   //   Save user in db & get token
-  fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`, {
+  fetch(`http://localhost:8000/user/${user?.email}`, {
     method: "PUT",
     headers: {
       "content-type": "application/json",

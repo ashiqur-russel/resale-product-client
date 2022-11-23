@@ -10,14 +10,16 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import setAuthToken from "../api/auth";
 const googleProvider = new GoogleAuthProvider();
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
+  const [currentRole, setCurrentRole] = useState("buyer");
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log(user);
   //1. Create User
   const createUser = (email, password) => {
     setLoading(true);
@@ -29,7 +31,6 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return updateProfile(auth.currentUser, userInfo);
   };
-
   // 4. Google Signin
   const signInWithGoogle = () => {
     setLoading(true);
