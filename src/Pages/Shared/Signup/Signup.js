@@ -14,6 +14,7 @@ const Signup = () => {
     signInWithGoogle,
   } = useContext(AuthContext);
   const [currentRole, setCurrentRole] = useState("buyer");
+  const [signUpError, setSignUPError] = useState("");
 
   const changeRole = (newRole) => {
     setCurrentRole(newRole);
@@ -29,7 +30,38 @@ const Signup = () => {
     //create user
     const formData = new FormData();
     formData.append("image", image);
+
     const url = `https://api.imgbb.com/1/upload?key=6f859024bd2f6172a80f12db0b47c603`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((photoData) => {
+        createUser(email, password)
+          .then((res) => {
+            setSignUPError("");
+
+            toast("User Created Successfully!");
+            const userInfo = {
+              displayName: name,
+              photoURL: photoData.data.display_url,
+            };
+            updateUserProfile(userInfo)
+              .then(() => {
+                console.log("Update user infor", userInfo);
+                setAuthToken(email, role);
+              })
+              .catch((err) => setSignUPError(err));
+          })
+          .catch((err) => {
+            setSignUPError(err);
+          });
+        setSignUPError("");
+      })
+      .catch((err) => setSignUPError(err));
+
+    /* const url = `https://api.imgbb.com/1/upload?key=6f859024bd2f6172a80f12db0b47c603`;
 
     fetch(url, {
       method: "POST",
@@ -41,8 +73,11 @@ const Signup = () => {
           .then((result) => {
             setAuthToken(email, role);
             console.log(result);
+            console.log(data.data.display_url);
+            console.log(name);
             updateUserProfile(name, data.data.display_url)
               .then((res) => {
+                console.log(res);
                 console.log("profile update");
               })
               .catch((err) => {
@@ -55,8 +90,8 @@ const Signup = () => {
           });
       })
       .catch((err) => console.log(err));
+  }; */
   };
-
   const handleGoogleSignin = () => {
     signInWithGoogle()
       .then((res) => {
