@@ -23,7 +23,10 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.logo {
+  font-family: "Courier New", Courier, monospace;
+  font-style: inherit;
+}
 .App-link {
   color: #61dafb;
 }
