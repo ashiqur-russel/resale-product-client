@@ -42,7 +42,7 @@ const Sidebar = ({ role, loading }) => {
           {/* Branding & Profile Info */}
           <div>
             <h2 className="text-3xl cursor-pointer font-semibold text-center text-gray-800 ">
-              <Link to="/"> AirCnC</Link>
+              <Link to="/"> Auto Haus</Link>
             </h2>
             <div className="flex flex-col items-center mt-6 -mx-2">
               <Link to="/dashboard">
@@ -69,8 +69,12 @@ const Sidebar = ({ role, loading }) => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
-              {role && role !== "requested" ? (
-                <>{role === "admin" ? <AdminMenu /> : <SellerMenu />} </>
+              {role && role !== "admin" ? (
+                <>
+                  <>{role === "admin" && <AdminMenu />} </>
+                  <>{role === "seller" && <SellerMenu />} </>
+                  <>{role === "buyer" && <UserMenu />} </>
+                </>
               ) : (
                 <UserMenu />
               )}
@@ -80,10 +84,7 @@ const Sidebar = ({ role, loading }) => {
 
         <div>
           <hr />
-          <button
-            handler={logout}
-            classes="flex block w-full rounded-full items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform"
-          >
+          <button classes="flex block w-full rounded-full items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform">
             <ArrowRightOnRectangleIcon className="w-5 h-5" />
 
             <span className="mx-4 font-medium">Logout</span>

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { getRole } from "../api/auth";
+import { getRole } from "../api/user";
 import Sidebar from "../components/Dashbaord/Sidebar/Sidebar";
 import SmallSpinner from "../components/spinner/Spinner";
 import { AuthContext } from "../contexts/Authprovider";
@@ -11,10 +11,12 @@ const DashboardLayout = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getRole(user?.email).then((data) => {
-      setRole(data.role);
-      setLoading(false);
-    });
+    getRole(user?.email)
+      .then((data) => {
+        setRole(data.role);
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
   }, [user]);
 
   return (
