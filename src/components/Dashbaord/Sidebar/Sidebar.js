@@ -4,16 +4,32 @@ import {
   ArrowRightOnRectangleIcon,
   Bars3Icon,
 } from "@heroicons/react/24/solid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/Authprovider";
 import AdminMenu from "./AdminMenu";
 import UserMenu from "./UserMenu";
+import toast from "react-hot-toast";
 const Sidebar = ({ role, loading }) => {
   const { user, logout } = useContext(AuthContext);
   const [isActive, setActive] = useState("false");
+
+  const navigate = useNavigate();
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
+  };
+
+  //Logout
+
+  const handleLogOut = () => {
+    logout()
+      .then(() => {
+        toast.success("Log out from dashboard!");
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <>
@@ -64,6 +80,7 @@ const Sidebar = ({ role, loading }) => {
                 </p>
               </Link>
               <button
+                onClick={handleLogOut}
                 className="bg-red-500 text-white active:bg-yellow-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"
               >
