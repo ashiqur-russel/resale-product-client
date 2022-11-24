@@ -9,6 +9,10 @@ module.exports = {
       colors: {
         trueGray: colors.trueGray,
       },
+
+      backgroundImage: {
+        "footer-texture": "url('/img/footer-texture.png')",
+      },
     },
     fontFamily: {
       sans: ["Inter", ...defaultTheme.fontFamily.sans],

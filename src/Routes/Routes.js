@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
+import Categories from "../Pages/Categories/Categories";
 import AllBuyers from "../Pages/Dashboard/Admin/AllBuyers";
 import AllUsers from "../Pages/Dashboard/Admin/AllUsers";
 import ReportedItems from "../Pages/Dashboard/Admin/ReportedItems";
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup></Signup>,
+      },
+
+      {
+        path: "/categories/:name",
+        loader: ({ params }) => {
+          return fetch(`http://localhost:8000/user/${params.name}`);
+        },
+        element: <Categories></Categories>,
       },
     ],
   },

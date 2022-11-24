@@ -3,7 +3,7 @@ import React from "react";
 const Service = () => {
   return (
     <div>
-      <div class="px-3 md:lg:xl:px-40   border-t border-b py-20 bg-opacity-10 ">
+      <div class="px-3 md:lg:xl:px-40   py-20 bg-opacity-10 ">
         <div class="grid grid-cols-1 md:lg:xl:grid-cols-3 group bg-white shadow-xl shadow-neutral-100 border ">
           <div class="p-10 flex flex-col items-center text-center group md:lg:xl:border-r md:lg:xl:border-b hover:bg-slate-50 cursor-pointer">
             <span class="p-5 rounded-full bg-red-500 text-white shadow-lg shadow-red-200">
