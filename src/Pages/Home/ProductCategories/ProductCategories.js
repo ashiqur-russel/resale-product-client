@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import vw from "../../../assets/brand/icons8-volkswagen-250.png";
 
 import "./ProductCategoried.css";
@@ -17,24 +17,18 @@ const ProductCategories = () => {
       });
   }, []);
 
-  const handleProductClick = (name) => {
-    console.log("clicked", name);
-    navigate(`/categories/${name}`);
-  };
   return (
     <div className="mt-5 p-4">
       <h2 className="text-3xl text-bold">Discover your cars with brand</h2>
       <div className="grid grid-auto-flow md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
         {carCategories.map((cat) => (
-          <div
-            key={cat._id}
-            className="card bg-base-100 shadow-xl"
-            onClick={() => handleProductClick(cat.name)}
-          >
-            <img className="productimg" src={cat.image} alt={cat.name} />
+          <Link key={cat._id} to={`/categories/${cat.name}`}>
+            <div className="card bg-base-100 shadow-xl">
+              <img className="productimg" src={cat.image} alt={cat.name} />
 
-            <p>{cat.name}</p>
-          </div>
+              <p>{cat.name}</p>
+            </div>
+          </Link>
         ))}
       </div>
     </div>

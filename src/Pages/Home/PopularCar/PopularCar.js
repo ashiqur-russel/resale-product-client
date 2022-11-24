@@ -4,24 +4,18 @@ import { Link } from "react-router-dom";
 const PopularCar = () => {
   return (
     <div>
-      <div class="m-10 p-4">
-        <div
-          class="relative rounded-lg block md:flex items-center bg-gray-100 shadow-xl"
-          style={{ "min-height": "19rem" }}
-        >
-          <div
-            class="relative w-full md:w-2/5 h-full overflow-hidden rounded-t-lg md:rounded-t-none md:rounded-l-lg"
-            style={{ "min-height": "19rem" }}
-          >
+      <div className="m-10 p-4">
+        <div className="relative rounded-lg block md:flex items-center bg-gray-100 shadow-xl">
+          <div className="relative w-full md:w-2/5 h-full overflow-hidden rounded-t-lg md:rounded-t-none md:rounded-l-lg">
             <img
-              class="absolute inset-0 w-full h-full object-cover object-center"
+              className="absolute inset-0 w-full h-full object-cover object-center"
               src="https://stripe.com/img/v3/payments/overview/photos/missguided.jpg"
               alt=""
             />
-            <div class="absolute inset-0 w-full h-full bg-indigo-900 opacity-75"></div>
-            <div class="absolute inset-0 w-full h-full flex items-center justify-center fill-current text-white">
+            <div className="absolute inset-0 w-full h-full bg-indigo-900 opacity-75"></div>
+            <div className="absolute inset-0 w-full h-full flex items-center justify-center fill-current text-white">
               <svg
-                class="w-full h-24"
+                className="w-full h-24"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 239 120"
               >
@@ -29,25 +23,22 @@ const PopularCar = () => {
               </svg>
             </div>
           </div>
-          <div class="w-full md:w-3/5 h-full flex items-center bg-gray-100 rounded-lg">
-            <div class="p-12 md:pr-24 md:pl-16 md:py-12">
-              <p class="text-gray-600">
-                <span class="text-gray-900">Missguided</span> is a UK-based
+          <div className="w-full md:w-3/5 h-full flex items-center bg-gray-100 rounded-lg">
+            <div className="p-12 md:pr-24 md:pl-16 md:py-12">
+              <p className="text-gray-600">
+                <span className="text-gray-900">Missguided</span> is a UK-based
                 fashion retailer that has nearly doubled in size since last
                 year. They integrated Stripe to deliver seamless checkout across
                 mobile and web for customers in 100+ countries, all while
                 automatically combating fraud.
               </p>
-              <Link
-                class="flex items-baseline mt-3 text-indigo-600 hover:text-indigo-900 focus:text-indigo-900"
-                href=""
-              >
+              <Link className="flex items-baseline mt-3 text-indigo-600 hover:text-indigo-900 focus:text-indigo-900">
                 <span>Learn more about our users</span>
-                <span class="text-xs ml-1">&#x279c;</span>
+                <span className="text-xs ml-1">&#x279c;</span>
               </Link>
             </div>
             <svg
-              class="hidden md:block absolute inset-y-0 h-full w-24 fill-current text-gray-100 -ml-12"
+              className="hidden md:block absolute inset-y-0 h-full w-24 fill-current text-gray-100 -ml-12"
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
             >

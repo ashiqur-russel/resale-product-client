@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       {
         path: "/categories/:name",
         loader: ({ params }) => {
-          return fetch(`http://localhost:8000/user/${params.name}`);
+          return fetch(`http://localhost:8000/products/${params.name}`);
         },
         element: <Categories></Categories>,
       },

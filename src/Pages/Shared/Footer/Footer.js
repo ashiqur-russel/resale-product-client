@@ -1,27 +1,27 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div className="mt-6">
-      <footer class="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
-        <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
-          <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <footer className="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
+        <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div>
-              <img src="#" class="mr-5 h-6 sm:h-9" alt="logo" />
-              <p class="max-w-xs mt-4 text-sm text-gray-600">
+              <img src="#" className="mr-5 h-6 sm:h-9" alt="logo" />
+              <p className="max-w-xs mt-4 text-sm text-gray-600">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Voluptas, accusantium.
               </p>
-              <div class="flex mt-8 space-x-6 text-gray-600">
-                <a
-                  class="hover:opacity-75"
-                  href
+              <div className="flex mt-8 space-x-6 text-gray-600">
+                <Link
+                  className="hover:opacity-75"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span class="sr-only"> Facebook </span>
+                  <span className="sr-only"> Facebook </span>
                   <svg
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -32,16 +32,15 @@ const Footer = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                </a>
-                <a
-                  class="hover:opacity-75"
-                  href
+                </Link>
+                <Link
+                  className="hover:opacity-75"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span class="sr-only"> Instagram </span>
+                  <span className="sr-only"> Instagram </span>
                   <svg
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -52,32 +51,30 @@ const Footer = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                </a>
-                <a
-                  class="hover:opacity-75"
-                  href
+                </Link>
+                <Link
+                  className="hover:opacity-75"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span class="sr-only"> Twitter </span>
+                  <span className="sr-only"> Twitter </span>
                   <svg
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
                     <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
                   </svg>
-                </a>
-                <a
-                  class="hover:opacity-75"
-                  href
+                </Link>
+                <Link
+                  className="hover:opacity-75"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span class="sr-only"> GitHub </span>
+                  <span className="sr-only"> GitHub </span>
                   <svg
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -88,16 +85,15 @@ const Footer = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                </a>
-                <a
-                  class="hover:opacity-75"
-                  href
+                </Link>
+                <Link
+                  className="hover:opacity-75"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span class="sr-only"> Dribbble </span>
+                  <span className="sr-only"> Dribbble </span>
                   <svg
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -108,97 +104,52 @@ const Footer = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
-            <div class="grid grid-cols-1 gap-8 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-8 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-4">
               <div>
-                <p class="font-medium">Company</p>
-                <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    About{" "}
-                  </a>
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    Meet the Team{" "}
-                  </a>
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    History{" "}
-                  </a>
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    Careers{" "}
-                  </a>
+                <p className="font-medium">Company</p>
+                <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+                  <Link className="hover:opacity-75"> About </Link>
+                  <Link className="hover:opacity-75"> Meet the Team </Link>
+                  <Link className="hover:opacity-75"> History </Link>
+                  <Link className="hover:opacity-75"> Careers </Link>
                 </nav>
               </div>
               <div>
-                <p class="font-medium">Services</p>
-                <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    1on1 Coaching{" "}
-                  </a>
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    Company Review{" "}
-                  </a>
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    Accounts Review{" "}
-                  </a>
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    HR Consulting{" "}
-                  </a>
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    SEO Optimisation{" "}
-                  </a>
+                <p className="font-medium">Services</p>
+                <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+                  <Link className="hover:opacity-75"> 1on1 Coaching </Link>
+                  <Link className="hover:opacity-75"> Company Review </Link>
+                  <Link className="hover:opacity-75"> Accounts Review </Link>
+                  <Link className="hover:opacity-75"> HR Consulting </Link>
+                  <Link className="hover:opacity-75"> SEO Optimisation </Link>
                 </nav>
               </div>
               <div>
-                <p class="font-medium">Helpful Links</p>
-                <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    Contact{" "}
-                  </a>
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    FAQs{" "}
-                  </a>
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    Live Chat{" "}
-                  </a>
+                <p className="font-medium">Helpful Links</p>
+                <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+                  <Link className="hover:opacity-75"> Contact </Link>
+                  <Link className="hover:opacity-75"> FAQs </Link>
+                  <Link className="hover:opacity-75"> Live Chat </Link>
                 </nav>
               </div>
               <div>
-                <p class="font-medium">Legal</p>
-                <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    Privacy Policy{" "}
-                  </a>
-                  <a class="hover:opacity-75" href>
+                <p className="font-medium">Legal</p>
+                <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+                  <Link className="hover:opacity-75"> Privacy Policy </Link>
+                  <Link className="hover:opacity-75">
                     {" "}
                     Terms &amp; Conditions{" "}
-                  </a>
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    Returns Policy{" "}
-                  </a>
-                  <a class="hover:opacity-75" href>
-                    {" "}
-                    Accessibility{" "}
-                  </a>
+                  </Link>
+                  <Link className="hover:opacity-75"> Returns Policy </Link>
+                  <Link className="hover:opacity-75"> Accessibility </Link>
                 </nav>
               </div>
             </div>
           </div>
-          <p class="mt-8 text-xs text-gray-800">© 2022 Comany Name</p>
+          <p className="mt-8 text-xs text-gray-800">© 2022 Comany Name</p>
         </div>
       </footer>
     </div>
