@@ -1,13 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../contexts/Authprovider";
-import { data } from "autoprefixer";
 import SmallSpinner from "../../../components/spinner/Spinner";
 import { getUser } from "../../../api/user";
+import { verificationRequest } from "../../../api/verificationRequest";
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
 
-  const [isVerified, setIsVerified] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -43,16 +42,6 @@ const MyProducts = () => {
       <div className=" flex items-center justify-between pb-6">
         <div>
           <h2 className="text-gray-600 font-semibold">Products Oder</h2>
-          <span
-            aria-hidden
-            className="relative inset-0 bg-lime-400 opacity-50  text-black p-1"
-          >
-            {isVerified ? (
-              "Verified"
-            ) : (
-              <span className="hover:cursor-pointer">Verify Yourself</span>
-            )}
-          </span>
         </div>
       </div>
       <div>

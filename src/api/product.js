@@ -12,4 +12,14 @@ const addProducts = async (porductData) => {
   const data = await response.json();
   return data;
 };
+
+export const getAllProductsByMail = async (email) => {
+  const url = `http://localhost:8000/products?email=${email}`;
+
+  const response = await fetch(url);
+
+  const data = await response.json();
+  console.log(data);
+  return data;
+};
 export default addProducts;

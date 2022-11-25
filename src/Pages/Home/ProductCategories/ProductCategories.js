@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import vw from "../../../assets/brand/icons8-volkswagen-250.png";
 
 import "./ProductCategoried.css";
 
 const ProductCategories = () => {
-  const img = "https://claw1990.imgbb.com/";
   const [carCategories, setCarCategories] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {

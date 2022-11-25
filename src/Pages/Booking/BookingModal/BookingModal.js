@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../contexts/Authprovider";
-import setBookings from "../../../api/bookings";
+import { saveBooking } from "../../../api/bookings";
 const BookingModal = ({ name, _id, resalePrice }) => {
   const { user } = useContext(AuthContext);
 
@@ -24,27 +24,23 @@ const BookingModal = ({ name, _id, resalePrice }) => {
       buyerName: buyerName,
       productName: name,
       productId: _id,
-      email: email,
-      phone: phone,
+      buyerEmail: email,
+      buyerPhone: phone,
       price,
       title: title,
     };
     console.log(booking);
 
-    setBookings(booking)
-      .then((res) => res.json())
-
+    saveBooking(booking)
       .then((data) => {
-        console.log(data);
         if (data.acknowledged) {
           toast.success("Booking Confirmed");
-          //refetch();
         } else {
-          toast.error(data.message);
+          toast.error("Booking Failed");
         }
       })
       .catch((err) => {
-        toast.error("Booking Failed", err);
+        console.log(err);
       });
   };
 

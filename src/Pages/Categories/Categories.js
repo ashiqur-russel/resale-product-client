@@ -75,7 +75,6 @@ const Categories = () => {
                   <div className="p-2 flex items-center text-sm text-gray-600">
                     {product?.verified === "true" && (
                       <>
-                        <img className="w-10 h-10" src={blueTick} alt="" />
                         <span className="ml-2">
                           {" "}
                           <label

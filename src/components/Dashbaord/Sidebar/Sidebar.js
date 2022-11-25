@@ -1,4 +1,7 @@
 import React, { useContext, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import blueTick from "../../../assets/brand/1271380.png";
+
 import SellerMenu from "./SellerMenu";
 import {
   ArrowRightOnRectangleIcon,
@@ -9,10 +12,20 @@ import { AuthContext } from "../../../contexts/Authprovider";
 import AdminMenu from "./AdminMenu";
 import UserMenu from "./UserMenu";
 import toast from "react-hot-toast";
-const Sidebar = ({ role, loading }) => {
+import { verificationRequest } from "../../../api/verificationRequest";
+const Sidebar = ({ loading }) => {
   const { user, logout } = useContext(AuthContext);
   const [isActive, setActive] = useState("false");
 
+  const { data: userData = [], refetch } = useQuery({
+    queryKey: ["userData", user?.email],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:8000/user/${user?.email}`);
+      const data = await res.json();
+      console.log(userData);
+      return data;
+    },
+  });
   const navigate = useNavigate();
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -30,6 +43,19 @@ const Sidebar = ({ role, loading }) => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleSubmitVerification = (event) => {
+    event.preventDefault();
+    const email = user?.email;
+    const verified = "requested";
+    const data = {
+      email,
+      verified,
+    };
+    console.log(data);
+    verificationRequest(data).then((data) => console.log(data));
+    refetch();
   };
   return (
     <>
@@ -79,6 +105,32 @@ const Sidebar = ({ role, loading }) => {
                   {user?.email}
                 </p>
               </Link>
+
+              <span className="hover:cursor-pointer m-1">
+                {userData ? (
+                  <>
+                    <>
+                      {userData?.verified === "" && (
+                        <span
+                          className="bg-orange-300 p-1 mt-1 mb-1"
+                          onClick={handleSubmitVerification}
+                        >
+                          Send Veirification
+                        </span>
+                      )}{" "}
+                    </>
+                    <>
+                      {userData?.verified === "requested" && (
+                        <span className="bg-orange-300 p-1 mt-1 mb-1">
+                          Veirification Pending
+                        </span>
+                      )}{" "}
+                    </>
+                  </>
+                ) : (
+                  <img className="w-5 h-5" src={blueTick} alt="" />
+                )}{" "}
+              </span>
               <button
                 onClick={handleLogOut}
                 className="bg-red-500 text-white active:bg-yellow-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -92,14 +144,9 @@ const Sidebar = ({ role, loading }) => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
-              {role ? (
-                <>
-                  <>{role === "admin" && <AdminMenu />} </>
-                  <>{role === "seller" && <SellerMenu />} </>
-                </>
-              ) : (
-                <UserMenu />
-              )}
+              {userData?.role === "admin" && <AdminMenu />}
+              {userData?.role === "seller" && <SellerMenu />}
+              {userData?.role === "buyer" && <UserMenu />}
             </nav>
           </div>
         </div>
