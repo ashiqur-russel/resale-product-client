@@ -1,14 +1,19 @@
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Link, useLoaderData } from "react-router-dom";
 import blueTick from "../../assets/brand/1271380.png";
+import BookingModal from "../Booking/BookingModal/BookingModal";
 const Categories = () => {
   const products = useLoaderData();
-  console.log(products);
+
+  const { name, _id, resalePrice } = products;
+
+  console.log(name, _id, resalePrice);
   return (
     <div className="antialiased text-gray-900 font-sans p-6">
       <div className="container mx-auto">
         <div className="flex flex-wrap -mx-4">
-          {products.map((product) => {
+          {products?.map((product) => {
             return (
               <div
                 key={product._id}
@@ -73,7 +78,12 @@ const Categories = () => {
                         <img className="w-10 h-10" src={blueTick} alt="" />
                         <span className="ml-2">
                           {" "}
-                          <button className="btn btn-outline">Book Now</button>
+                          <label
+                            htmlFor="booking-modal"
+                            className="btn btn-primary text-white"
+                          >
+                            Book Appointment
+                          </label>
                         </span>
                       </>
                     )}
@@ -114,6 +124,11 @@ const Categories = () => {
                     </svg> */}
                   </div>
                 </div>
+                <BookingModal
+                  name={product.name}
+                  _id={product._id}
+                  resalePrice={product.resalePrice}
+                ></BookingModal>
               </div>
             );
           })}

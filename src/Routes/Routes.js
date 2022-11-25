@@ -13,6 +13,7 @@ import MyProducts from "../Pages/Dashboard/Seller/MyProducts";
 import Home from "../Pages/Home/Home/Home";
 import Signin from "../Pages/Shared/Signin/Signin";
 import Signup from "../Pages/Shared/Signup/Signup";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,12 @@ const router = createBrowserRouter([
         loader: ({ params }) => {
           return fetch(`http://localhost:8000/products/${params.name}`);
         },
-        element: <Categories></Categories>,
+        element: (
+          <PrivateRoute>
+            {" "}
+            <Categories></Categories>
+          </PrivateRoute>
+        ),
       },
     ],
   },

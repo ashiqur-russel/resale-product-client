@@ -10,14 +10,11 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import setAuthToken from "../api/auth";
 const googleProvider = new GoogleAuthProvider();
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
-  const [currentRole, setCurrentRole] = useState("buyer");
-
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
