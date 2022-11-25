@@ -30,7 +30,7 @@ const AddProduct = () => {
           description,
           picture: data,
           sellersName: user?.displayName,
-          verified: user?.emailVerified,
+          verified: "false",
           email: user?.email,
         };
 

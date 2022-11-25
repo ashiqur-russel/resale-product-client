@@ -27,6 +27,11 @@ const Signup = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
     const role = currentRole;
+    let verified = false;
+    if (currentRole !== "seller") {
+      verified = true;
+    }
+
     //create user
     const formData = new FormData();
     formData.append("image", image);
@@ -50,7 +55,7 @@ const Signup = () => {
             updateUserProfile(userInfo)
               .then(() => {
                 console.log("Update user infor", userInfo);
-                setAuthToken(email, role);
+                setAuthToken(email, role, verified);
               })
               .catch((err) => setSignUPError(err));
           })

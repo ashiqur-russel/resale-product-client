@@ -1,7 +1,8 @@
-const setAuthToken = (user, role) => {
+const setAuthToken = (user, role, verified) => {
   const currentUser = {
     email: user.email || user,
     role: role,
+    verified: verified,
   };
 
   //   Save user in db & get token
