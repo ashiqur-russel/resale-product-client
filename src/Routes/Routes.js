@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
+import FourZeroFour from "../components/ErrorPage/FourZeroFour";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
+import Blog from "../Pages/Blog/Blog";
 import Categories from "../Pages/Categories/Categories";
 import AllBuyers from "../Pages/Dashboard/Admin/AllBuyers";
-import AllUsers from "../Pages/Dashboard/Admin/AllUsers";
+import AllSellers from "../Pages/Dashboard/Admin/AllSellers";
 import ReportedItems from "../Pages/Dashboard/Admin/ReportedItems";
 import MyOrders from "../Pages/Dashboard/Buyer/MyOrders";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
@@ -19,6 +21,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <FourZeroFour></FourZeroFour>,
     children: [
       {
         path: "/",
@@ -31,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup></Signup>,
+      },
+      {
+        path: "/blog",
+        element: <Blog></Blog>,
       },
 
       {
@@ -57,7 +64,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/all-sellers",
-        element: <AllUsers></AllUsers>,
+        element: <AllSellers></AllSellers>,
       },
       {
         path: "/dashboard/all-buyers",

@@ -20,7 +20,7 @@ const AddProduct = () => {
 
     getImageUrl(image)
       .then((data) => {
-        const homeData = {
+        const ProductData = {
           title,
           location,
           name,
@@ -28,13 +28,14 @@ const AddProduct = () => {
           resalePrice: resale_price,
           useOfTime: useofYear,
           description,
+          availability: "available",
+          displayOnAdvertise: "false",
           picture: data,
           sellersName: user?.displayName,
-          verified: "false",
           email: user?.email,
         };
 
-        addProduct(homeData).then((data) => {
+        addProduct(ProductData).then((data) => {
           console.log(data);
           toast.success("Product Added Successfully");
         });

@@ -17,7 +17,7 @@ const setAuthToken = (user, role, verified) => {
     .then((data) => {
       console.log(data);
       //Save token in LocalStorage
-      localStorage.setItem("aircnc-token", data.token);
+      localStorage.setItem("resale-token", data.token);
     });
 };
 export default setAuthToken;

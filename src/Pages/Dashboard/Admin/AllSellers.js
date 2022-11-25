@@ -1,6 +1,6 @@
 import React from "react";
 
-const AllBuyers = () => {
+const AllSellers = () => {
   return (
     <div>
       <div className="bg-white p-8 rounded-md w-full">
@@ -83,4 +83,4 @@ const AllBuyers = () => {
   );
 };
 
-export default AllBuyers;
+export default AllSellers;

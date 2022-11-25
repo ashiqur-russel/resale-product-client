@@ -65,37 +65,6 @@ const Signup = () => {
         setSignUPError("");
       })
       .catch((err) => setSignUPError(err));
-
-    /* const url = `https://api.imgbb.com/1/upload?key=6f859024bd2f6172a80f12db0b47c603`;
-
-    fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        createUser(email, password)
-          .then((result) => {
-            setAuthToken(email, role);
-            console.log(result);
-            console.log(data.data.display_url);
-            console.log(name);
-            updateUserProfile(name, data.data.display_url)
-              .then((res) => {
-                console.log(res);
-                console.log("profile update");
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          })
-          .catch((err) => {
-            setLoading(false);
-            console.log(err);
-          });
-      })
-      .catch((err) => console.log(err));
-  }; */
   };
   const handleGoogleSignin = () => {
     signInWithGoogle()
