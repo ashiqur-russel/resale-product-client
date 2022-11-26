@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useLoaderData } from "react-router-dom";
 import blueTick from "../../assets/brand/1271380.png";
 import BookingModal from "../Booking/BookingModal/BookingModal";
+import AuthProvider from "../../contexts/Authprovider";
 const Categories = () => {
   const products = useLoaderData();
-
   const { name, _id, resalePrice } = products;
 
-  console.log(name, _id, resalePrice);
   return (
     <div className="antialiased text-gray-900 font-sans p-6">
       <div className="container mx-auto">
@@ -73,7 +72,7 @@ const Categories = () => {
                     </span>
                   </div>
                   <div className="p-2 flex items-center text-sm text-gray-600">
-                    {product?.verified === "true" && (
+                    {product?.sellerVerified === "verified" && (
                       <>
                         <span className="ml-2">
                           {" "}

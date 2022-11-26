@@ -1,13 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import AddProductForm from "../../../components/Forms/AddProductForm";
-import { AuthContext } from "../../../contexts/Authprovider";
 import addProduct from "../../../api/product";
 import { getImageUrl } from "../../../api/imageUpload";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../contexts/Authprovider";
+import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
+
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const [isVerified, setisVerified] = useState("");
+
+  const { data: sellerData = [] } = useQuery({
+    queryKey: ["sellerData"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:8000/users`);
+      const data = await res.json();
+      const filter = data.filter((user) => user.role === "seller");
+      console.log(filter);
+      setisVerified(filter?.verified);
+      return filter[0]?.verified;
+    },
+  });
+
+  console.log(sellerData);
+
+  //const [userData, setUserData] = useState(AuthProvider);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const location = event.target.location.value;
@@ -18,6 +40,7 @@ const AddProduct = () => {
     const useofYear = event.target.purchase_year.value;
     const description = event.target.description.value;
     const image = event.target.image.files[0];
+    let sellerVerified = sellerData;
 
     getImageUrl(image)
       .then((data) => {
@@ -29,7 +52,7 @@ const AddProduct = () => {
           resalePrice: resale_price,
 
           useOfTime: parseInt(useofYear),
-
+          sellerVerified,
           description,
           availability: "yes",
           advertised: "no",
@@ -37,6 +60,7 @@ const AddProduct = () => {
           picture: data,
           sellersName: user?.displayName,
           email: user?.email,
+          postDate: format(new Date(), "PP"),
         };
 
         addProduct(ProductData).then((data) => {

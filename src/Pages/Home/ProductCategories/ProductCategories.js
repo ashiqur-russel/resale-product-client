@@ -20,11 +20,11 @@ const ProductCategories = () => {
       <h2 className="text-3xl text-bold">Discover your cars with brand</h2>
       <div className="grid grid-auto-flow md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
         {carCategories.map((cat) => (
-          <Link key={cat._id} to={`/categories/${cat.name}`}>
+          <Link key={cat?._id} to={`/categories/${cat?.name}`}>
             <div className="card bg-base-100 shadow-xl">
-              <img className="productimg" src={cat.image} alt={cat.name} />
+              <img className="productimg" src={cat?.image} alt={cat?.name} />
 
-              <p>{cat.name}</p>
+              <p>{cat?.name}</p>
             </div>
           </Link>
         ))}
