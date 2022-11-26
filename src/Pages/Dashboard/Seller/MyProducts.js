@@ -3,18 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../contexts/Authprovider";
 import SmallSpinner from "../../../components/spinner/Spinner";
 import { getUser } from "../../../api/user";
-import { verificationRequest } from "../../../api/verificationRequest";
-import { async } from "@firebase/util";
 import { addAdvertise } from "../../../api/advertise";
 import toast from "react-hot-toast";
 import { updateDisplayAdvertise } from "../../../api/product";
-import { data } from "autoprefixer";
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(true);
   const [isAvailable, setIsAvailable] = useState("");
-  const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
     getUser(user?.email)
@@ -157,7 +153,7 @@ const MyProducts = () => {
                         </span>
                       </td>
                       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        {product?.availability === "yes" ? (
+                        {/* {product?.availability === "yes" ? (
                           <button
                             onClick={() => {
                               handlePublish(product);
@@ -170,6 +166,36 @@ const MyProducts = () => {
                           </button>
                         ) : (
                           ""
+                        )} */}
+
+                        {product?.availability === "yes" &&
+                          product?.advertised === "no" && (
+                            <button
+                              onClick={() => {
+                                handlePublish(product);
+                              }}
+                              className="btb btn-danger bg-green-400 p-2 hover:cursor-pointer w-full"
+                            >
+                              Publish
+                            </button>
+                          )}
+
+                        {product?.advertised === "yes" && (
+                          <button
+                            disabled
+                            className="btb btn-danger bg-green-400 p-2 hover:cursor-pointer w-full"
+                          >
+                            Publisded
+                          </button>
+                        )}
+
+                        {product?.availability === "no" && (
+                          <button
+                            disabled
+                            className="btb btn-danger bg-yellow-400 p-2 hover:cursor-pointer w-full"
+                          >
+                            Sold
+                          </button>
                         )}
                       </td>
 

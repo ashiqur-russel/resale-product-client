@@ -34,7 +34,7 @@ export const updateDisplayAdvertise = async (data) => {
     headers: {
       "content-type": "application/json",
     },
-    body: JSON.stringify({ ...data, advertised: "yes" }),
+    body: JSON.stringify({ data }),
   });
   const users = await response.json();
 

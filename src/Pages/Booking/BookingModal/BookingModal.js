@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../contexts/Authprovider";
 import { saveBooking } from "../../../api/bookings";
-const BookingModal = ({ name, _id, resalePrice }) => {
+const BookingModal = ({ name, _id, resalePrice, picture, title }) => {
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
-  console.log(name, _id, resalePrice);
+  console.log(name, _id, resalePrice, picture, title);
 
   const todaysDate = new Date();
   const date = format(todaysDate, "PP");
@@ -20,6 +21,7 @@ const BookingModal = ({ name, _id, resalePrice }) => {
     const price = form.resalePrice.value;
     const title = form.itemName.value;
     const booking = {
+      photo: picture,
       bookingDate: date,
       buyerName: buyerName,
       productName: name,
@@ -27,6 +29,8 @@ const BookingModal = ({ name, _id, resalePrice }) => {
       buyerEmail: email,
       buyerPhone: phone,
       price,
+      isBooked: "no",
+      picture: picture,
       title: title,
     };
     console.log(booking);

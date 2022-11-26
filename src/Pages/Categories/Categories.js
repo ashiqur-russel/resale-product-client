@@ -124,9 +124,11 @@ const Categories = () => {
                   </div>
                 </div>
                 <BookingModal
-                  name={product.name}
-                  _id={product._id}
-                  resalePrice={product.resalePrice}
+                  name={product?.name}
+                  _id={product?._id}
+                  resalePrice={product?.resalePrice}
+                  picture={product?.picture}
+                  title={product?.title}
                 ></BookingModal>
               </div>
             );

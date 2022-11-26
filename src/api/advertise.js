@@ -12,3 +12,12 @@ export const addAdvertise = async (publishData) => {
   const data = await response.json();
   return data;
 };
+
+export const getAddvertisedProduct = async () => {
+  const url = `http://localhost:8000/addvertise`;
+  const response = await fetch(url);
+
+  const data = await response.json();
+  console.log(data);
+  return data;
+};

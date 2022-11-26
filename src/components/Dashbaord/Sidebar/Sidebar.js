@@ -16,17 +16,16 @@ import { verificationRequest } from "../../../api/verificationRequest";
 const Sidebar = ({ loading }) => {
   const { user, logout } = useContext(AuthContext);
   const [isActive, setActive] = useState("false");
+  const navigate = useNavigate();
 
   const { data: userData = [], refetch } = useQuery({
     queryKey: ["userData", user?.email],
     queryFn: async () => {
       const res = await fetch(`http://localhost:8000/user/${user?.email}`);
       const data = await res.json();
-      console.log(userData);
       return data;
     },
   });
-  const navigate = useNavigate();
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
