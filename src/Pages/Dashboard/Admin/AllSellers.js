@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { data } from "autoprefixer";
+import toast from "react-hot-toast";
+import { getAllUser, verifySeller } from "../../../api/user";
 
 const AllSellers = () => {
   const { data: sellerData = [], refetch } = useQuery({
@@ -13,6 +14,15 @@ const AllSellers = () => {
       return filter;
     },
   });
+
+  const handleRequest = async (user) => {
+    verifySeller(user)
+      .then((data) => {
+        console.log(data);
+        refetch();
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
@@ -42,6 +52,9 @@ const AllSellers = () => {
                     </th>
                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                       Verify Request
+                    </th>
+                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      Permission
                     </th>
                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                       Action
@@ -83,8 +96,28 @@ const AllSellers = () => {
                               aria-hidden
                               className="absolute inset-0 bg-red-200 opacity-50 rounded-full"
                             ></span>
-                            <span className="relative">{seller?.verified}</span>
+                            <span aria-hidden className="relative">
+                              {seller?.verified}
+                            </span>
                           </span>
+                        </td>
+                        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                          {seller?.verified && seller.verified === "requested" && (
+                            <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                              <span
+                                aria-hidden
+                                className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
+                              ></span>
+                              <span
+                                aria-hidden
+                                onClick={() => handleRequest(seller)}
+                                className="relative hover:cursor-pointer"
+                              >
+                                {" "}
+                                Approve
+                              </span>
+                            </span>
+                          )}
                         </td>
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                           <button className="btb btn-danger bg-red-400 p-2 hover:cursor-pointer">

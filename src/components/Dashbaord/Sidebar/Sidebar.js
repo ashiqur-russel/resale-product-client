@@ -87,7 +87,7 @@ const Sidebar = ({ loading }) => {
               <Link to="/"> Auto Haus</Link>
             </h2>
             <div className="flex flex-col items-center mt-6 -mx-2">
-              <Link to="/dashboard">
+              <Link>
                 <img
                   className="object-cover w-24 h-24 mx-2 rounded-full"
                   src={user?.photoURL}
@@ -95,12 +95,12 @@ const Sidebar = ({ loading }) => {
                   referrerPolicy="no-referrer"
                 />
               </Link>
-              <Link to="/dashboard">
+              <Link>
                 <h4 className="mx-2 mt-2 font-medium text-gray-800  hover:underline">
                   {user?.displayName}
                 </h4>
               </Link>
-              <Link to="/dashboard">
+              <Link>
                 <p className="mx-2 mt-1 text-sm font-medium text-gray-600  hover:underline">
                   {user?.email}
                 </p>
@@ -110,7 +110,7 @@ const Sidebar = ({ loading }) => {
                 {userData ? (
                   <>
                     <>
-                      {userData?.verified === "" && (
+                      {userData?.verified && userData.verified === "" && (
                         <span
                           className="bg-orange-300 p-1 mt-1 mb-1"
                           onClick={handleSubmitVerification}

@@ -13,7 +13,7 @@ const DashboardLayout = () => {
   useEffect(() => {
     getRole(user?.email)
       .then((data) => {
-        setRole(data.role);
+        setRole(data?.role);
         setLoading(false);
       })
       .catch((error) => console.log(error));
