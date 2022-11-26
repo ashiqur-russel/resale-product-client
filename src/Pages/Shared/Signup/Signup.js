@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../contexts/Authprovider";
 import setAuthToken from "../../../api/auth";
+import setAuthTokenSocial from "../../../api/socialAuth";
 const Signup = () => {
   const {
     user,
@@ -26,10 +27,10 @@ const Signup = () => {
     const image = event.target.image.files[0];
     const email = event.target.email.value;
     const password = event.target.password.value;
-    const role = currentRole;
+    let role = currentRole;
     let verified = false;
     if (currentRole !== "seller") {
-      verified = true;
+      verified = "";
     }
 
     //create user
@@ -55,7 +56,7 @@ const Signup = () => {
             updateUserProfile(userInfo)
               .then(() => {
                 console.log("Update user infor", userInfo);
-                setAuthToken(email, role, verified);
+                setAuthToken(email, currentRole);
               })
               .catch((err) => setSignUPError(err));
           })
@@ -65,6 +66,37 @@ const Signup = () => {
         setSignUPError("");
       })
       .catch((err) => setSignUPError(err));
+
+    /* const url = `https://api.imgbb.com/1/upload?key=6f859024bd2f6172a80f12db0b47c603`;
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        createUser(email, password)
+          .then((result) => {
+            setAuthToken(email, role);
+            console.log(result);
+            console.log(data.data.display_url);
+            console.log(name);
+            updateUserProfile(name, data.data.display_url)
+              .then((res) => {
+                console.log(res);
+                console.log("profile update");
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          })
+          .catch((err) => {
+            setLoading(false);
+            console.log(err);
+          });
+      })
+      .catch((err) => console.log(err));
+  }; */
   };
   const handleGoogleSignin = () => {
     signInWithGoogle()
@@ -72,10 +104,11 @@ const Signup = () => {
         console.log(res);
         const user = res.user;
         const userEmail = user?.email;
+        const role = currentRole;
         console.log(userEmail);
 
         toast.success("Logged in with google account");
-        setAuthToken(userEmail, currentRole);
+        setAuthTokenSocial(userEmail, role);
       })
       .catch((err) => console.log(err));
   };

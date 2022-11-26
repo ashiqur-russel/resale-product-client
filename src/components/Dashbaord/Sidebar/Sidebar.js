@@ -54,8 +54,11 @@ const Sidebar = ({ loading }) => {
       verified,
     };
     console.log(data);
-    verificationRequest(data).then((data) => console.log(data));
-    refetch();
+    verificationRequest(data)
+      .then((data) => {
+        refetch();
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <>
@@ -106,30 +109,32 @@ const Sidebar = ({ loading }) => {
                 </p>
               </Link>
 
-              <span className="hover:cursor-pointer m-1">
+              <span className="hover:cursor-pointer m-5">
                 {userData ? (
                   <>
                     <>
-                      {userData?.verified && userData.verified === "" && (
+                      {userData && userData?.verified === "" && (
                         <span
-                          className="bg-orange-300 p-1 mt-1 mb-1"
+                          className="bg-rose-300 p-3 mt-1 mb-1 rounded-lg"
                           onClick={handleSubmitVerification}
                         >
-                          Send Veirification
+                          Verify Account
                         </span>
-                      )}{" "}
-                    </>
-                    <>
+                      )}
+
                       {userData?.verified === "requested" && (
                         <span className="bg-orange-300 p-1 mt-1 mb-1">
                           Veirification Pending
                         </span>
-                      )}{" "}
+                      )}
+                      {userData?.verified === "verified" && (
+                        <img className="w-5 h-5" src={blueTick} alt="" />
+                      )}
                     </>
                   </>
                 ) : (
-                  <img className="w-5 h-5" src={blueTick} alt="" />
-                )}{" "}
+                  <span />
+                )}
               </span>
               <button
                 onClick={handleLogOut}
@@ -144,9 +149,16 @@ const Sidebar = ({ loading }) => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
-              {userData?.role === "admin" && <AdminMenu />}
-              {userData?.role === "seller" && <SellerMenu />}
-              {userData?.role === "buyer" && <UserMenu />}
+              {userData?.role ? (
+                <>
+                  {" "}
+                  {userData?.role === "admin" && <AdminMenu />}
+                  {userData?.role === "seller" && <SellerMenu />}
+                  {userData?.role === "buyer" && <UserMenu />}
+                </>
+              ) : (
+                <UserMenu></UserMenu>
+              )}
             </nav>
           </div>
         </div>

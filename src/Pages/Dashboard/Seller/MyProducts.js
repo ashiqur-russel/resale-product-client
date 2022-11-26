@@ -4,15 +4,23 @@ import { AuthContext } from "../../../contexts/Authprovider";
 import SmallSpinner from "../../../components/spinner/Spinner";
 import { getUser } from "../../../api/user";
 import { verificationRequest } from "../../../api/verificationRequest";
+import { async } from "@firebase/util";
+import { addAdvertise } from "../../../api/advertise";
+import toast from "react-hot-toast";
+import { updateDisplayAdvertise } from "../../../api/product";
+import { data } from "autoprefixer";
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(true);
+  const [isAvailable, setIsAvailable] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
     getUser(user?.email)
       .then((data) => {
         setLoading(data.verified);
+        setIsAvailable(data?.availability);
       })
       .catch((error) => console.log(error));
   }, [user]);
@@ -20,7 +28,11 @@ const MyProducts = () => {
   console.log(user?.email);
   const url = `http://localhost:8000/my-products?email=${user?.email}`;
 
-  const { data: products = [], isLoading } = useQuery({
+  const {
+    data: products = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["products", user?.email],
     queryFn: async () => {
       const res = await fetch(url, {
@@ -32,6 +44,36 @@ const MyProducts = () => {
       return data;
     },
   });
+
+  // trigger when publish button will be clicked
+  const handlePublish = async (productData) => {
+    const advertiseData = {
+      product_id: productData?._id,
+      sellerName: productData?.sellersName,
+      price: productData?.resalePrice,
+      sellerEmail: productData?.email,
+
+      picture: productData?.picture,
+      location: productData?.location,
+    };
+
+    addAdvertise(advertiseData)
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          updateDisplayAdvertise(productData)
+            .then((data) => {
+              console.log(data);
+              toast.success("Display on Advertise");
+              refetch();
+            })
+            .catch((err) => console.log(err));
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  console.log(isAvailable);
 
   if (isLoading) {
     <SmallSpinner></SmallSpinner>;
@@ -64,6 +106,12 @@ const MyProducts = () => {
                   </th>
                   <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                     Availability{" "}
+                  </th>
+                  <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Advetise
+                  </th>
+                  <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Action
                   </th>
                 </tr>
               </thead>
@@ -105,14 +153,30 @@ const MyProducts = () => {
                       </td>
                       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                          <select
-                            id="condition"
-                            className="relative border-0  inset-0 bg-green-200 opacity-50 rounded-full"
-                          >
-                            <option value="sold">Avaibale</option>
-                            <option value="available">Sold</option>
-                          </select>
+                          {product?.availability}
                         </span>
+                      </td>
+                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        {product?.availability === "yes" ? (
+                          <button
+                            onClick={() => {
+                              handlePublish(product);
+                            }}
+                            className="btb btn-danger bg-green-400 p-2 hover:cursor-pointer"
+                          >
+                            {product?.advertised === "no"
+                              ? "Publish"
+                              : "Published"}
+                          </button>
+                        ) : (
+                          ""
+                        )}
+                      </td>
+
+                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <button className="btb btn-danger bg-red-400 p-2 hover:cursor-pointer">
+                          DELETE
+                        </button>
                       </td>
                     </tr>
                   ))}

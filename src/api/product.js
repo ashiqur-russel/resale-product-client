@@ -23,3 +23,20 @@ export const getAllProductsByMail = async (email) => {
   return data;
 };
 export default addProducts;
+
+//update product
+
+export const updateDisplayAdvertise = async (data) => {
+  const url = `http://localhost:8000/publish/${data?._id}`;
+  delete data?._id;
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ ...data, advertised: "yes" }),
+  });
+  const users = await response.json();
+
+  return users;
+};

@@ -1,8 +1,7 @@
-const setAuthToken = (user, role, verified) => {
+const setAuthTokenSocial = (user, role) => {
   const currentUser = {
     email: user.email || user,
-    role: role,
-    verified: verified,
+    role: role || "buyer",
   };
 
   //   Save user in db & get token
@@ -20,4 +19,4 @@ const setAuthToken = (user, role, verified) => {
       localStorage.setItem("aircnc-token", data.token);
     });
 };
-export default setAuthToken;
+export default setAuthTokenSocial;
