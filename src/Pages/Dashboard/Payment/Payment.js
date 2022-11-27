@@ -7,7 +7,7 @@ import Checkout from "../../Checkout/Checkout";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
 const Payment = () => {
-  const data = useLoaderData();
+  const bookingData = useLoaderData();
   const {
     buyerName,
     productName,
@@ -16,7 +16,7 @@ const Payment = () => {
     buyerEmail,
     price,
     isBooked,
-  } = data;
+  } = bookingData;
   return (
     <div>
       <h1 className="text-center text-bold text-2xl">
@@ -28,7 +28,7 @@ const Payment = () => {
 
       <div className="w-96 my-6 bg-white">
         <Elements stripe={stripePromise}>
-          <Checkout />
+          <Checkout bookingData={bookingData} />
         </Elements>
       </div>
     </div>
