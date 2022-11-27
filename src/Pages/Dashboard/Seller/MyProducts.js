@@ -5,12 +5,14 @@ import SmallSpinner from "../../../components/spinner/Spinner";
 import { getUser } from "../../../api/user";
 import { addAdvertise } from "../../../api/advertise";
 import toast from "react-hot-toast";
-import { updateDisplayAdvertise } from "../../../api/product";
+import { deleteProduct, updateDisplayAdvertise } from "../../../api/product";
+import DeleteModal from "../../../components/Modal/DeleteModal";
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(true);
   const [isAvailable, setIsAvailable] = useState("");
+  let [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     getUser(user?.email)
@@ -48,7 +50,7 @@ const MyProducts = () => {
       sellerName: productData?.sellersName,
       price: productData?.resalePrice,
       sellerEmail: productData?.email,
-
+      salesStatus: "unsold",
       picture: productData?.picture,
       location: productData?.location,
     };
@@ -69,8 +71,24 @@ const MyProducts = () => {
       .catch((err) => console.log(err));
   };
 
-  console.log(isAvailable);
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
 
+  const modalHandler = (id) => {
+    console.log(id);
+    closeModal();
+    deleteProduct(id).then((data) => {
+      console.log(data);
+
+      toast.success("Product Deleted");
+      refetch();
+    });
+    closeModal();
+  };
   if (isLoading) {
     <SmallSpinner></SmallSpinner>;
   }
@@ -200,9 +218,20 @@ const MyProducts = () => {
                       </td>
 
                       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <button className="btb btn-danger bg-red-400 p-2 hover:cursor-pointer">
+                        <button
+                          onClick={openModal}
+                          className="btb btn-danger bg-red-400 p-2 hover:cursor-pointer"
+                        >
                           DELETE
                         </button>
+
+                        <DeleteModal
+                          openModal={openModal}
+                          isOpen={isOpen}
+                          closeModal={closeModal}
+                          modalHandler={modalHandler}
+                          id={product?._id}
+                        ></DeleteModal>
                       </td>
                     </tr>
                   ))}

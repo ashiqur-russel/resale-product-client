@@ -40,3 +40,18 @@ export const updateDisplayAdvertise = async (data) => {
 
   return users;
 };
+
+//delete product
+
+export const deleteProduct = async (id) => {
+  const url = `http://localhost:8000/product/${id}`;
+  const response = await fetch(url, {
+    method: "DELETE",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  const data = await response.json();
+
+  return data;
+};

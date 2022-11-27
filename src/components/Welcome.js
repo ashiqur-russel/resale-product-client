@@ -1,9 +1,41 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import axios, * as others from "axios";
+import { AuthContext } from "../contexts/Authprovider";
 
 const Welcome = () => {
+  const { user } = useContext(AuthContext);
+  const [role, setRole] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/users?email=${user?.email}`)
+      .then((res) => {
+        setRole(res.data[0].role);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, [user?.email]);
   return (
     <div>
-      <h2 className="text-center">Welcome to dashboard</h2>
+      {!loading && role ? (
+        <>
+          <h1 className="text-3xl text-bold text-center">
+            Hello, {user?.displayName}
+          </h1>
+          <p className="text-center">Welcome to {role} dashboard!</p>
+        </>
+      ) : (
+        <>
+          <h1 className="text-3xl text-bold text-center">
+            Hello, {user?.displayName}
+          </h1>
+          <p className="text-center">Welcome to Buyer's dashboard!</p>
+        </>
+      )}
     </div>
   );
 };

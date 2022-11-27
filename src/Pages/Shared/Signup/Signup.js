@@ -27,10 +27,13 @@ const Signup = () => {
     const image = event.target.image.files[0];
     const email = event.target.email.value;
     const password = event.target.password.value;
-    let role = currentRole;
-    let verified = false;
-    if (currentRole !== "seller") {
+    const role = currentRole;
+
+    let verified = "";
+    if (currentRole === "seller") {
       verified = "";
+    } else if (currentRole === "buyer") {
+      verified = "NN";
     }
 
     //create user
@@ -56,7 +59,7 @@ const Signup = () => {
             updateUserProfile(userInfo)
               .then(() => {
                 console.log("Update user infor", userInfo);
-                setAuthToken(email, currentRole);
+                setAuthToken(email, role, verified);
               })
               .catch((err) => setSignUPError(err));
           })

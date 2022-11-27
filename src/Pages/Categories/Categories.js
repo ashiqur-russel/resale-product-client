@@ -64,11 +64,14 @@ const Categories = () => {
                   <div className="p-4 border-t border-b text-xs text-gray-700">
                     <span className="flex items-center mb-1">
                       <i className="far fa-clock fa-fw mr-2 text-gray-900"></i>{" "}
-                      3 Tage
+                      {product?.postDate}
                     </span>
                     <span className="flex items-center">
                       <i className="far fa-address-card fa-fw text-gray-900 mr-2"></i>{" "}
-                      {product.sellersName}
+                      {product.sellersName}{" "}
+                      <span className="mx-5">
+                        <img className="w-5 h-5" src={blueTick} alt="" />
+                      </span>
                     </span>
                   </div>
                   <div className="p-2 flex items-center text-sm text-gray-600">

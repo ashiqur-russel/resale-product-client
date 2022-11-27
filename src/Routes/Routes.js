@@ -11,11 +11,13 @@ import AllSellers from "../Pages/Dashboard/Admin/AllSellers";
 import ReportedItems from "../Pages/Dashboard/Admin/ReportedItems";
 import MyOrders from "../Pages/Dashboard/Buyer/MyOrders";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 import AddProduct from "../Pages/Dashboard/Seller/AddProduct";
 import MyBuyers from "../Pages/Dashboard/Seller/MyBuyers";
 import MyProducts from "../Pages/Dashboard/Seller/MyProducts";
 import Home from "../Pages/Home/Home/Home";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
+import Error from "../Pages/Shared/DisplayError/Error";
 import Signin from "../Pages/Shared/Signin/Signin";
 import Signup from "../Pages/Shared/Signup/Signup";
 import PrivateRoute from "./PrivateRoute";
@@ -24,7 +26,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    errorElement: <FourZeroFour></FourZeroFour>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
@@ -73,6 +75,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
+    errorElement: <Error />,
     element: (
       <PrivateRoute>
         <DashboardLayout></DashboardLayout>
@@ -112,7 +115,7 @@ const router = createBrowserRouter([
         path: "/dashboard/my-orders",
         element: (
           <PrivateRoute>
-            <AllSellers></AllSellers>
+            <MyOrders></MyOrders>
           </PrivateRoute>
         ),
       },
@@ -140,7 +143,22 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "/dashboard/payment/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:8000/bookings/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <Payment></Payment>
+          </PrivateRoute>
+        ),
+      },
     ],
+  },
+
+  {
+    path: "*",
+    element: <FourZeroFour />,
   },
 ]);
 
