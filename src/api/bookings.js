@@ -1,5 +1,5 @@
 export const setBookings = async (bookings) => {
-  const url = "http://localhost:8000/bookings";
+  const url = "https://auto-haus-ashiqur-russel.vercel.app/bookings";
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -14,7 +14,7 @@ export const setBookings = async (bookings) => {
 };
 
 export const saveBooking = async (bookingData) => {
-  const url = "http://localhost:8000/bookings";
+  const url = "https://auto-haus-ashiqur-russel.vercel.app/bookings";
 
   const response = await fetch(url, {
     method: "POST",
@@ -30,7 +30,7 @@ export const saveBooking = async (bookingData) => {
 };
 
 export const getAllBookingsByEmail = async (email) => {
-  const url = `http://localhost:8000/bookings?email=${email}`;
+  const url = `https://auto-haus-ashiqur-russel.vercel.app/bookings?email=${email}`;
 
   const response = await fetch(url, {
     method: "GET",

@@ -14,13 +14,16 @@ const AllBuyers = () => {
   } = useQuery({
     queryKey: ["buyerData"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:8000/users`, {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          authorization: `bearer ${localStorage.getItem("sales-token")}`,
-        },
-      });
+      const res = await fetch(
+        `https://auto-haus-ashiqur-russel.vercel.app/users`,
+        {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+            authorization: `bearer ${localStorage.getItem("sales-token")}`,
+          },
+        }
+      );
       const data = await res.json();
       const filter = data.filter(
         (user) => user.role !== "seller" && user.role !== "admin"

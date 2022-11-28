@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:8000/bookings?email=${user?.email}`;
+  const url = `https://auto-haus-ashiqur-russel.vercel.app/bookings?email=${user?.email}`;
 
   const { data: orders = [], isLoading } = useQuery({
     queryKey: ["orders", user?.email],
