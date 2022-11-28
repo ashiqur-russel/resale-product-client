@@ -29,6 +29,7 @@ const Checkout = ({ bookingData }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `bearer ${localStorage.getItem("sales-token")}`,
       },
       body: JSON.stringify({ price }),
     })

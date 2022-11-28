@@ -5,6 +5,7 @@ export const verificationRequest = async (verificationData) => {
     method: "PUT",
     headers: {
       "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
     },
     body: JSON.stringify(verificationData),
   });

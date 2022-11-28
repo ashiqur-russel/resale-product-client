@@ -10,6 +10,7 @@ const setAuthToken = (user, role, verified) => {
     method: "PUT",
     headers: {
       "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
     },
     body: JSON.stringify(currentUser),
   })

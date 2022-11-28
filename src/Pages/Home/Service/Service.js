@@ -43,7 +43,7 @@ const Service = () => {
               </svg>
             </span>
             <p className="text-xl font-medium text-slate-700 mt-3">
-              Best Test preparation
+              Monthy Installments.Contract term between 36-96 months.
             </p>
             <p className="mt-2 text-sm text-slate-500">
               Know where you stand and what next to do to succeed .
@@ -66,8 +66,7 @@ const Service = () => {
               Car choice Guidance
             </p>
             <p className="mt-2 text-sm text-slate-500">
-              Professional Advice for higher education abroad and select the top
-              institutions worldwide.
+              Advice for selecting right car for you.
             </p>
           </div>
 
@@ -102,11 +101,10 @@ const Service = () => {
               </svg>
             </span>
             <p className="text-xl font-medium text-slate-700 mt-3">
-              Free Mock Exams
+              Free Service
             </p>
             <p className="mt-2 text-sm text-slate-500">
-              Get Topic-Wise Tests, Section- Wise and mock tests for your
-              preparation.
+              We provide free service(T&D)
             </p>
           </div>
 

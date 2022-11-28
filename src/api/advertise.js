@@ -5,6 +5,7 @@ export const addAdvertise = async (publishData) => {
     method: "POST",
     headers: {
       "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
     },
     body: JSON.stringify(publishData),
   });

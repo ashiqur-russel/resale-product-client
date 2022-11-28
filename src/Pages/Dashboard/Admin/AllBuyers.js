@@ -14,9 +14,17 @@ const AllBuyers = () => {
   } = useQuery({
     queryKey: ["buyerData"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:8000/users`);
+      const res = await fetch(`http://localhost:8000/users`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("sales-token")}`,
+        },
+      });
       const data = await res.json();
-      const filter = data.filter((user) => user.role === "buyer");
+      const filter = data.filter(
+        (user) => user.role !== "seller" && user.role !== "admin"
+      );
       console.log(filter);
       return filter;
     },
@@ -32,7 +40,7 @@ const AllBuyers = () => {
   const modalHandler = (email) => {
     deleteUserByEmail(email).then((data) => {
       console.log("inside");
-      toast.success("Seller Deleted");
+      toast.success("Buyer Deleted");
       refetch();
     });
     closeModal();
@@ -97,18 +105,18 @@ const AllBuyers = () => {
                         </td>
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                           <button
-                            onClick={openModal}
+                            onClick={() => modalHandler(buyer?.email)}
                             className="btb btn-danger bg-red-400 p-2 hover:cursor-pointer"
                           >
                             DELETE
                           </button>
-                          <DeleteModal
+                          {/* <DeleteModal
                             openModal={openModal}
                             isOpen={isOpen}
                             closeModal={closeModal}
                             modalHandler={modalHandler}
                             email={buyer.email}
-                          ></DeleteModal>
+                          ></DeleteModal> */}
                         </td>
                       </tr>
                     ))}

@@ -13,7 +13,13 @@ export const getRole = async (email) => {
 export const getAllUser = async () => {
   const url = `http://localhost:8000/users`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
+    },
+  });
 
   const data = await response.json();
   console.log(data);
@@ -21,11 +27,16 @@ export const getAllUser = async () => {
 };
 
 //get user by email
-
 export const getUser = async (email) => {
   const url = `http://localhost:8000/user/${email}`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
+    },
+  });
 
   const data = await response.json();
   console.log(data);
@@ -36,7 +47,13 @@ export const getUser = async (email) => {
 export const getVerifiedStatus = async (email) => {
   const url = `http://localhost:8000/user/${email}`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
+    },
+  });
 
   const data = await response.json();
   console.log(data);
@@ -53,6 +70,7 @@ export const verifySeller = async (user) => {
     method: "PUT",
     headers: {
       "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
     },
     body: JSON.stringify({ ...user, verified: "verified" }),
   });
@@ -68,6 +86,7 @@ export const deleteUserByEmail = async (email) => {
     method: "DELETE",
     headers: {
       "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
     },
   });
   const data = await response.json();

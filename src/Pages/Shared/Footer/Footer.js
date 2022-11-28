@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 const Footer = () => {
   return (
     <div className="mt-6">
@@ -8,10 +7,9 @@ const Footer = () => {
         <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div>
-              <img src="#" className="mr-5 h-6 sm:h-9" alt="logo" />
+              <h1 cla>Auto Haus</h1>
               <p className="max-w-xs mt-4 text-sm text-gray-600">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptas, accusantium.
+                Connect with us
               </p>
               <div className="flex mt-8 space-x-6 text-gray-600">
                 <Link
@@ -118,13 +116,14 @@ const Footer = () => {
                 </nav>
               </div>
               <div>
-                <p className="font-medium">Services</p>
+                <p className="font-medium">Help & Services</p>
                 <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                  <Link className="hover:opacity-75"> 1on1 Coaching </Link>
-                  <Link className="hover:opacity-75"> Company Review </Link>
-                  <Link className="hover:opacity-75"> Accounts Review </Link>
-                  <Link className="hover:opacity-75"> HR Consulting </Link>
-                  <Link className="hover:opacity-75"> SEO Optimisation </Link>
+                  <Link className="hover:opacity-75">
+                    {" "}
+                    Frequently Asked Qustion
+                  </Link>
+                  <Link className="hover:opacity-75"> Contact us </Link>
+                  <Link className="hover:opacity-75"> +491234567890 </Link>
                 </nav>
               </div>
               <div>
@@ -149,7 +148,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <p className="mt-8 text-xs text-gray-800">© 2022 Comany Name</p>
+          <p className="mt-8 text-xs text-gray-800">© 2022 Autohaus</p>
         </div>
       </footer>
     </div>

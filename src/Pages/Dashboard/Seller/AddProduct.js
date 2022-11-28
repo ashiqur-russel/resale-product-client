@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 
 const AddProduct = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [isVerified, setisVerified] = useState("");
@@ -76,9 +76,9 @@ const AddProduct = () => {
   return (
     <>
       <h1 className="text-3xl font-bold text-gray-800 py-8 text-center">
-        Add Home
+        Add Product
       </h1>
-      <AddProductForm handleSubmit={handleSubmit} />
+      <AddProductForm loading={loading} handleSubmit={handleSubmit} />
     </>
   );
 };

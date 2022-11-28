@@ -1,25 +1,59 @@
-import React from "react";
-import carImg1 from "../../../assets/cars/ford-ecosport-1.jpeg";
-import carImg2 from "../../../assets/cars/Spinny-Resale-Header.jpeg";
-import carImg3 from "../../../assets/cars/2019-Hyundai-Creta-1_big.jpeg";
+import React, { useEffect, useContext, useState } from "react";
+import blueTick from "../../../assets/brand/1271380.png";
+
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../contexts/Authprovider";
+import { getVerifiedStatus } from "../../../api/user";
 
 const AdvertisedItem = () => {
+  const { user } = useContext(AuthContext);
+  const [isVerified, setisVerified] = useState("");
+
+  useEffect(() => {
+    getVerifiedStatus(user?.email).then((data) => {
+      console.log("-----------", data);
+    });
+  }, [user]);
   const { data: products = [] } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const url = `http://localhost:8000/addvertise`;
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data);
       return data;
     },
   });
+
+  const handleReport = async (id) => {
+    console.log("clicked", id);
+    const url = `http://localhost:8000/product/${id}`;
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("sales-token")}`,
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+
+    return data;
+  };
+
+  /* {userData?.verified === "verified" && (
+                        <img className="w-5 h-5" src={blueTick} alt="" />
+                      )} */
   return (
     <div className="mt-5 p-4">
-      <h2 className="text-3xl text-bold">Current Advertised offer</h2>
-      <p className="">Our most popular offers - many for a short time only</p>
+      {products.length > 0 && (
+        <>
+          <h2 className="text-3xl text-bold">Current Advertised offer</h2>
+          <p className="">
+            Our most popular offers - many for a short time only
+          </p>
+        </>
+      )}
       <div className="grid grid-auto-flow  md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         {products &&
           products?.map((product) => (
@@ -30,17 +64,30 @@ const AdvertisedItem = () => {
                 </figure>
                 <div className="card-body">
                   <h2 className="card-title">
-                    Ford Fiesta
+                    Seller Name :{product?.sellerName}
                     <div className="badge badge-secondary">NEW</div>
                   </h2>
-                  <p>$ {product?.price}</p>
+                  <p>Price $ {product?.price}</p>
                   <div className="card-actions justify-end">
                     <div className="badge badge-outline">
-                      <p>4 Door</p>
+                      <p>{product?.salesStatus}</p>
                     </div>
-                    <div className="badge badge-outline">Diesel</div>
-                    <div className="badge badge-outline bg-green-400">
-                      Verified Seller
+                    <div
+                      className="badge badge-error hover:mouse"
+                      onClick={() => handleReport(product?.product_id)}
+                    >
+                      Report
+                    </div>
+                    <div className="badge badge-outline">
+                      {product?.sellerVerified === "verified" ? (
+                        <>
+                          {" "}
+                          <img className="w-5 h-5" src={blueTick} alt="" />
+                          <span>Verified Seller</span>
+                        </>
+                      ) : (
+                        ""
+                      )}{" "}
                     </div>
                   </div>
                 </div>

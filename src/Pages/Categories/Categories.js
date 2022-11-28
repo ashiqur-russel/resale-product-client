@@ -1,12 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useLoaderData } from "react-router-dom";
 import blueTick from "../../assets/brand/1271380.png";
 import BookingModal from "../Booking/BookingModal/BookingModal";
-import AuthProvider from "../../contexts/Authprovider";
+import AuthProvider, { AuthContext } from "../../contexts/Authprovider";
+import { getVerifiedStatus } from "../../api/user";
 const Categories = () => {
   const products = useLoaderData();
   const { name, _id, resalePrice } = products;
+  const { user } = useContext(AuthContext);
+  const [isVerified, setisVerified] = useState("");
+
+  useEffect(() => {
+    getVerifiedStatus(user?.email).then((data) => {
+      console.log("-----------", data);
+    });
+  }, [user]);
 
   return (
     <div className="antialiased text-gray-900 font-sans p-6">
@@ -70,7 +79,15 @@ const Categories = () => {
                       <i className="far fa-address-card fa-fw text-gray-900 mr-2"></i>{" "}
                       {product.sellersName}{" "}
                       <span className="mx-5">
-                        <img className="w-5 h-5" src={blueTick} alt="" />
+                        {product?.sellerVerified === "verified" ? (
+                          <>
+                            {" "}
+                            <img className="w-5 h-5" src={blueTick} alt="" />
+                            <span>Added by Verified Seller</span>
+                          </>
+                        ) : (
+                          ""
+                        )}{" "}
                       </span>
                     </span>
                   </div>

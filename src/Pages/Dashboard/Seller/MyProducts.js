@@ -53,6 +53,7 @@ const MyProducts = () => {
       salesStatus: "unsold",
       picture: productData?.picture,
       location: productData?.location,
+      sellerVerified: productData?.sellerVerified,
     };
 
     addAdvertise(advertiseData)
@@ -79,6 +80,7 @@ const MyProducts = () => {
   }
 
   const modalHandler = (id) => {
+    console.log(id);
     deleteProduct(id).then((data) => {
       toast.success("Product Deleted");
       refetch();

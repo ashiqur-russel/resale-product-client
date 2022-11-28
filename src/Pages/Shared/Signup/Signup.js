@@ -5,11 +5,13 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../../contexts/Authprovider";
 import setAuthToken from "../../../api/auth";
 import setAuthTokenSocial from "../../../api/socialAuth";
+import useToken from "../../../hooks/useToken";
 const Signup = () => {
   const {
     user,
     createUser,
     updateUserProfile,
+    logout,
     loading,
     setLoading,
     signInWithGoogle,

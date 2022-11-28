@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../contexts/Authprovider";
+import SmallSpinner from "../spinner/Spinner";
 const AddProductForm = ({ handleSubmit }) => {
+  const { loading } = useContext(AuthContext);
+
   const [condition, setCondition] = useState("");
   const [categories, setCategoried] = useState([]);
   useEffect(() => {
@@ -9,13 +12,18 @@ const AddProductForm = ({ handleSubmit }) => {
       .then((data) => {
         console.log(data);
         setCategoried(data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
   const changeCondition = (newCondition) => {
     setCondition(newCondition);
   };
-
+  if (loading) {
+    return <SmallSpinner></SmallSpinner>;
+  }
   return (
     <>
       <div className="flex justify-center mt-6">
@@ -202,7 +210,7 @@ const AddProductForm = ({ handleSubmit }) => {
               type="submit"
               className="block w-full p-3 text-center font-medium tracking-wide text-white bg-orange-700 transition duration-200 rounded shadow-md  hover:bg-gray-200 hover:text-gray-700 focus:shadow-outline focus:outline-none"
             >
-              SAVE
+              {loading ? <SmallSpinner /> : "SAVE"}
             </button>
           </form>
         </div>

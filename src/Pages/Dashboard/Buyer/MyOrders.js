@@ -8,14 +8,6 @@ import { Link } from "react-router-dom";
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
 
-  /* 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8000/bookings?email=${user?.email}`)
-      .then((res) => setOrders(res.data))
-      .catch((err) => console.log(err));
-  }, [user?.email]); */
-
   const url = `http://localhost:8000/bookings?email=${user?.email}`;
 
   const { data: orders = [], isLoading } = useQuery({
@@ -23,6 +15,8 @@ const MyOrders = () => {
     queryFn: async () => {
       const res = await fetch(url, {
         headers: {
+          "content-type": "application/json",
+
           authorization: `bearer ${localStorage.getItem("resale-token")}`,
         },
       });
