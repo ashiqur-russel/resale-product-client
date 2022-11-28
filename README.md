@@ -2,7 +2,7 @@
 
 Auto Haus - A use car Resale Website
 
-Live Website:
+Live Website: https://auto-kaufen.web.app/
 
 A web application for an Where people can Post their used car to resale and buy from there.This website built with React, Firebase, Experess & Mongodb.
 
@@ -12,9 +12,9 @@ This project is provided by Programming hero as an assignment as a Final Assaign
 
 ## For Admin Access
 
-adminEmail: <your admin email>
+adminEmail: admin@autohaus.com
 
-adminPassword: <your admin password>
+adminPassword: 123456
 
 ## Project Description and Key Features
 
