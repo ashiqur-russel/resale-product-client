@@ -24,7 +24,7 @@ const MyProducts = () => {
   }, [user]);
 
   console.log(user?.email);
-  const url = `https://auto-haus-ashiqur-russel.vercel.app/my-products?email=${user?.email}`;
+  const url = `http://localhost:8000/my-products?email=${user?.email}`;
 
   const {
     data: products = [],

@@ -1,5 +1,5 @@
 export const addAdvertise = async (publishData) => {
-  const url = `https://auto-haus-ashiqur-russel.vercel.app/publish`;
+  const url = `http://localhost:8000/publish`;
 
   const response = await fetch(url, {
     method: "POST",
@@ -15,7 +15,7 @@ export const addAdvertise = async (publishData) => {
 };
 
 export const getAddvertisedProduct = async () => {
-  const url = `https://auto-haus-ashiqur-russel.vercel.app/addvertise`;
+  const url = `http://localhost:8000/addvertise`;
   const response = await fetch(url);
 
   const data = await response.json();

@@ -21,16 +21,13 @@ const Sidebar = ({ loading }) => {
   const { data: userData = [], refetch } = useQuery({
     queryKey: ["userData", user?.email],
     queryFn: async () => {
-      const res = await fetch(
-        `https://auto-haus-ashiqur-russel.vercel.app/user/${user?.email}`,
-        {
-          method: "GET",
-          headers: {
-            "content-type": "application/json",
-            authorization: `bearer ${localStorage.getItem("sales-token")}`,
-          },
-        }
-      );
+      const res = await fetch(`http://localhost:8000/user/${user?.email}`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("sales-token")}`,
+        },
+      });
       const data = await res.json();
       return data;
     },

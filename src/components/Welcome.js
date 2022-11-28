@@ -9,16 +9,13 @@ const Welcome = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://auto-haus-ashiqur-russel.vercel.app/users?email=${user?.email}`,
-        {
-          method: "GET",
-          headers: {
-            "content-type": "application/json",
-            authorization: `bearer ${localStorage.getItem("sales-token")}`,
-          },
-        }
-      )
+      .get(`http://localhost:8000/users?email=${user?.email}`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("sales-token")}`,
+        },
+      })
       .then((res) => {
         setRole(res.data[0].role);
         setLoading(false);

@@ -6,7 +6,7 @@ const setAuthToken = (user, role, verified) => {
   };
 
   //   Save user in db & get token
-  fetch(`https://auto-haus-ashiqur-russel.vercel.app/user/${user?.email}`, {
+  fetch(`http://localhost:8000/user/${user?.email}`, {
     method: "PUT",
     headers: {
       "content-type": "application/json",

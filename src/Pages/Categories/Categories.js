@@ -5,6 +5,7 @@ import blueTick from "../../assets/brand/1271380.png";
 import BookingModal from "../Booking/BookingModal/BookingModal";
 import AuthProvider, { AuthContext } from "../../contexts/Authprovider";
 import { getVerifiedStatus } from "../../api/user";
+import { data } from "autoprefixer";
 const Categories = () => {
   const products = useLoaderData();
   const { name, _id, resalePrice } = products;
@@ -14,6 +15,8 @@ const Categories = () => {
   useEffect(() => {
     getVerifiedStatus(user?.email).then((data) => {
       console.log("-----------", data);
+
+      setisVerified(data);
     });
   }, [user]);
 
