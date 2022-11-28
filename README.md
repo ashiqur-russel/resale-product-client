@@ -10,6 +10,12 @@ A web application for an Where people can Post their used car to resale and buy 
 
 This project is provided by Programming hero as an assignment as a Final Assaignment.
 
+## For Admin Access
+
+adminEmail: <your admin email>
+
+adminPassword: <your admin password>
+
 ## Project Description and Key Features
 
       1.  From Home page people can find the Advertised product from seller.
