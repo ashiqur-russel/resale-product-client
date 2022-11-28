@@ -4,6 +4,7 @@ export const setBookings = async (bookings) => {
     method: "POST",
     headers: {
       "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
     },
     body: JSON.stringify(bookings),
   });
@@ -19,6 +20,7 @@ export const saveBooking = async (bookingData) => {
     method: "POST",
     headers: {
       "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
     },
     body: JSON.stringify(bookingData),
   });
@@ -30,7 +32,14 @@ export const saveBooking = async (bookingData) => {
 export const getAllBookingsByEmail = async (email) => {
   const url = `http://localhost:8000/bookings?email=${email}`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
+    },
+  });
 
   const data = await response.json();
   console.log(data);

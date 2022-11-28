@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const Checkout = ({ bookingData }) => {
@@ -108,7 +109,10 @@ const Checkout = ({ bookingData }) => {
           console.log(data);
           if (data.insertedId) {
             setSuccess("Congrats! Your payment Completed");
+
             setTransactionId(paymentIntent.id);
+
+            toast.success("Payment is Successful!");
           }
         });
     }

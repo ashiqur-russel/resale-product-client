@@ -1,19 +1,48 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { getAllUser, verifySeller } from "../../../api/user";
+import { deleteUserByEmail, getAllUser, verifySeller } from "../../../api/user";
+import DeleteModal from "../../../components/Modal/UserDeleteModal";
+import SmallSpinner from "../../../components/spinner/Spinner";
 
 const AllSellers = () => {
-  const { data: sellerData = [], refetch } = useQuery({
+  let [isOpen, setIsOpen] = useState(false);
+
+  const {
+    data: sellerData = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["sellerData"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:8000/users`);
       const data = await res.json();
-      const filter = data.filter((user) => user.role === "seller");
+      const filter = data.filter(
+        (user_seller) => user_seller.role === "seller"
+      );
       console.log(filter);
       return filter;
     },
   });
+
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  const modalHandler = (email) => {
+    deleteUserByEmail(email).then((data) => {
+      console.log("inside");
+      toast.success("Seller Deleted");
+      refetch();
+    });
+    closeModal();
+  };
+  if (isLoading) {
+    <SmallSpinner></SmallSpinner>;
+  }
 
   const handleRequest = async (user) => {
     verifySeller(user)
@@ -120,9 +149,19 @@ const AllSellers = () => {
                           )}
                         </td>
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <button className="btb btn-danger bg-red-400 p-2 hover:cursor-pointer">
+                          <button
+                            onClick={openModal}
+                            className="btb btn-danger bg-red-400 p-2 hover:cursor-pointer"
+                          >
                             DELETE
                           </button>
+                          <DeleteModal
+                            openModal={openModal}
+                            isOpen={isOpen}
+                            closeModal={closeModal}
+                            modalHandler={modalHandler}
+                            email={seller.email}
+                          ></DeleteModal>
                         </td>
                       </tr>
                     ))}

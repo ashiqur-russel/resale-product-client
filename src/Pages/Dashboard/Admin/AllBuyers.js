@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { deleteUserByEmail } from "../../../api/user";
+import toast from "react-hot-toast";
+import SmallSpinner from "../../../components/spinner/Spinner";
+import DeleteModal from "../../../components/Modal/UserDeleteModal";
 
 const AllBuyers = () => {
-  const { data: buyerData = [], refetch } = useQuery({
+  let [isOpen, setIsOpen] = useState(false);
+  const {
+    data: buyerData = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["buyerData"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:8000/users`);
@@ -12,6 +21,26 @@ const AllBuyers = () => {
       return filter;
     },
   });
+
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  const modalHandler = (email) => {
+    deleteUserByEmail(email).then((data) => {
+      console.log("inside");
+      toast.success("Seller Deleted");
+      refetch();
+    });
+    closeModal();
+  };
+  if (isLoading) {
+    <SmallSpinner></SmallSpinner>;
+  }
+
   return (
     <div>
       <div className="bg-white p-8 rounded-md w-full">
@@ -66,11 +95,20 @@ const AllBuyers = () => {
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                           {buyer?.role}
                         </td>
-
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <button className="btb btn-danger bg-red-400 p-2 hover:cursor-pointer">
+                          <button
+                            onClick={openModal}
+                            className="btb btn-danger bg-red-400 p-2 hover:cursor-pointer"
+                          >
                             DELETE
                           </button>
+                          <DeleteModal
+                            openModal={openModal}
+                            isOpen={isOpen}
+                            closeModal={closeModal}
+                            modalHandler={modalHandler}
+                            email={buyer.email}
+                          ></DeleteModal>
                         </td>
                       </tr>
                     ))}

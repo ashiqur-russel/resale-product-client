@@ -79,14 +79,12 @@ const MyProducts = () => {
   }
 
   const modalHandler = (id) => {
-    console.log(id);
-    closeModal();
     deleteProduct(id).then((data) => {
-      console.log(data);
-
       toast.success("Product Deleted");
       refetch();
     });
+    refetch();
+
     closeModal();
   };
   if (isLoading) {

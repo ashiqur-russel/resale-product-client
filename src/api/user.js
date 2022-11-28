@@ -60,3 +60,17 @@ export const verifySeller = async (user) => {
 
   return users;
 };
+
+//delete user
+export const deleteUserByEmail = async (email) => {
+  const url = `http://localhost:8000/user?email=${email}`;
+  const response = await fetch(url, {
+    method: "DELETE",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  const data = await response.json();
+
+  return data;
+};

@@ -17,7 +17,9 @@ const AddProduct = () => {
   const { data: sellerData = [] } = useQuery({
     queryKey: ["sellerData"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:8000/users`);
+      const res = await fetch(`http://localhost:8000/users`, {
+        authorization: `bearer ${localStorage.getItem("sales-token")}`,
+      });
       const data = await res.json();
       const filter = data.filter((user) => user.role === "seller");
       console.log(filter);

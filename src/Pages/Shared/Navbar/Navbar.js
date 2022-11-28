@@ -24,7 +24,9 @@ const Navbar = () => {
           <span className="ml-3 text-2xl font-bold ">Auto Haus</span>
         </Link>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          <Link to="/blog">Blog</Link>
+          <Link className="mr-3" to="/blog">
+            Blog
+          </Link>
           {user?.email ? (
             <>
               <Link

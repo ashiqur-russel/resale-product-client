@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../contexts/Authprovider";
 import { saveBooking } from "../../../api/bookings";
+import { useNavigate } from "react-router-dom";
 const BookingModal = ({ name, _id, resalePrice, picture, title }) => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
@@ -11,6 +12,7 @@ const BookingModal = ({ name, _id, resalePrice, picture, title }) => {
 
   const todaysDate = new Date();
   const date = format(todaysDate, "PP");
+  const navigate = useNavigate();
   const handleBooking = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -39,6 +41,7 @@ const BookingModal = ({ name, _id, resalePrice, picture, title }) => {
       .then((data) => {
         if (data.acknowledged) {
           toast.success("Booking Confirmed");
+          navigate("/dashboard/my-orders");
         } else {
           toast.error("Booking Failed");
         }

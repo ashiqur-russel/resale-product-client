@@ -5,6 +5,7 @@ const addProducts = async (porductData) => {
     method: "POST",
     headers: {
       "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
     },
     body: JSON.stringify(porductData),
   });
@@ -16,7 +17,13 @@ const addProducts = async (porductData) => {
 export const getAllProductsByMail = async (email) => {
   const url = `http://localhost:8000/products?email=${email}`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
+    },
+  });
 
   const data = await response.json();
   console.log(data);
@@ -33,6 +40,8 @@ export const updateDisplayAdvertise = async (data) => {
     method: "PUT",
     headers: {
       "content-type": "application/json",
+
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
     },
     body: JSON.stringify({ data }),
   });
@@ -49,6 +58,8 @@ export const deleteProduct = async (id) => {
     method: "DELETE",
     headers: {
       "content-type": "application/json",
+
+      authorization: `bearer ${localStorage.getItem("sales-token")}`,
     },
   });
   const data = await response.json();

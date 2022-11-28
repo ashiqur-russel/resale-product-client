@@ -23,11 +23,8 @@ const AdvertisedItem = () => {
       <div className="grid grid-auto-flow  md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         {products &&
           products?.map((product) => (
-            <Link to="">
-              <div
-                key={product?._id}
-                className="card w-full bg-base-100 shadow-xl"
-              >
+            <Link to="" key={product._id}>
+              <div className="card w-full bg-base-100 shadow-xl">
                 <figure>
                   <img src={product?.picture} alt="car1" />
                 </figure>

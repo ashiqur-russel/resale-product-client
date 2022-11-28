@@ -1,7 +1,8 @@
-const setAuthTokenSocial = (user, role) => {
+const setAuthTokenSocial = (user, uid) => {
   const currentUser = {
     email: user.email || user,
-    role: role || "buyer",
+    role: "buyer",
+    uid: user?.uid || uid,
   };
 
   //   Save user in db & get token
