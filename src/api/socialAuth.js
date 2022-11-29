@@ -6,7 +6,7 @@ const setAuthTokenSocial = (user, uid) => {
   };
 
   //   Save user in db & get token
-  fetch(`https://auto-haus-ashiqur-russel.vercel.app/user/${user?.email}`, {
+  fetch(`https://autohaus.vercel.app/user/${user?.email}`, {
     method: "PUT",
     headers: {
       "content-type": "application/json",

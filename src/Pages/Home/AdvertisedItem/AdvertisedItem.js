@@ -5,20 +5,16 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/Authprovider";
 import { getVerifiedStatus } from "../../../api/user";
+import toast from "react-hot-toast";
+import SmallSpinner from "../../../components/spinner/Spinner";
 
 const AdvertisedItem = () => {
-  const { user } = useContext(AuthContext);
-  const [isVerified, setisVerified] = useState("");
+  const { loading, user } = useContext(AuthContext);
 
-  useEffect(() => {
-    getVerifiedStatus(user?.email).then((data) => {
-      console.log("-----------", data);
-    });
-  }, [user]);
   const { data: products = [] } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const url = `https://auto-haus-ashiqur-russel.vercel.app/addvertise`;
+      const url = `https://autohaus.vercel.app/addvertise`;
       const res = await fetch(url);
       const data = await res.json();
       return data;
@@ -27,23 +23,35 @@ const AdvertisedItem = () => {
 
   const handleReport = async (id) => {
     console.log("clicked", id);
-    const url = `https://auto-haus-ashiqur-russel.vercel.app/product/${id}`;
-    const response = await fetch(url, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("sales-token")}`,
-      },
-    });
-    const data = await response.json();
-    console.log(data);
 
-    return data;
+    if (user?.uid) {
+      const url = `https://autohaus.vercel.app/product/${id}`;
+
+      fetch(url, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("sales-token")}`,
+        },
+      }).then((res) =>
+        res
+          .json()
+          .then((data) => {
+            if (data.acknowledged) {
+              toast.success("Report Sent to Admin");
+            }
+          })
+          .catch((err) => console.log(err))
+      );
+    }
   };
 
   /* {userData?.verified === "verified" && (
                         <img className="w-5 h-5" src={blueTick} alt="" />
                       )} */
+  if (loading) {
+    return <SmallSpinner></SmallSpinner>;
+  }
   return (
     <div className="mt-5 p-4">
       {products.length > 0 && (
@@ -72,12 +80,15 @@ const AdvertisedItem = () => {
                     <div className="badge badge-outline">
                       <p>{product?.salesStatus}</p>
                     </div>
-                    <div
-                      className="badge badge-error hover:mouse"
-                      onClick={() => handleReport(product?.product_id)}
-                    >
-                      Report
-                    </div>
+                    {user && user?.uid && (
+                      <div
+                        className="badge badge-error hover:mouse"
+                        onClick={() => handleReport(product?.product_id)}
+                      >
+                        Report
+                      </div>
+                    )}
+
                     <div className="badge badge-outline">
                       {product?.sellerVerified === "verified" ? (
                         <>

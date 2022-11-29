@@ -6,16 +6,17 @@ import BookingModal from "../Booking/BookingModal/BookingModal";
 import AuthProvider, { AuthContext } from "../../contexts/Authprovider";
 import { getVerifiedStatus } from "../../api/user";
 import { data } from "autoprefixer";
+import { format } from "date-fns";
 const Categories = () => {
   const products = useLoaderData();
   const { name, _id, resalePrice } = products;
   const { user } = useContext(AuthContext);
   const [isVerified, setisVerified] = useState("");
+  const currentDateYear = format(new Date(), "y");
+  console.log(currentDateYear);
 
   useEffect(() => {
     getVerifiedStatus(user?.email).then((data) => {
-      console.log("-----------", data);
-
       setisVerified(data);
     });
   }, [user]);
@@ -47,7 +48,11 @@ const Categories = () => {
                     </span>
                     <h2 className="mt-2 mb-2  font-bold">{product.name}</h2>
                     <p className="text-sm">
-                      Year of Used : {product.useOfTime}
+                      Year of Used :{" "}
+                      <span className="font-bold">
+                        {currentDateYear - product.useOfTime}
+                      </span>{" "}
+                      Years
                     </p>
                     <div className="mt-3 flex items-center">
                       <span className="text-sm font-semibold">

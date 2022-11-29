@@ -22,7 +22,7 @@ const Sidebar = ({ loading }) => {
     queryKey: ["userData", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `https://auto-haus-ashiqur-russel.vercel.app/user/${user?.email}`,
+        `https://autohaus.vercel.app/user/${user?.email}`,
         {
           method: "GET",
           headers: {

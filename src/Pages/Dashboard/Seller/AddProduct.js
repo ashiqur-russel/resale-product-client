@@ -17,12 +17,9 @@ const AddProduct = () => {
   const { data: sellerData = [] } = useQuery({
     queryKey: ["sellerData"],
     queryFn: async () => {
-      const res = await fetch(
-        `https://auto-haus-ashiqur-russel.vercel.app/users`,
-        {
-          authorization: `bearer ${localStorage.getItem("sales-token")}`,
-        }
-      );
+      const res = await fetch(`https://autohaus.vercel.app/users`, {
+        authorization: `bearer ${localStorage.getItem("sales-token")}`,
+      });
       const data = await res.json();
       const filter = data.filter((user) => user.role === "seller");
       console.log(filter);
