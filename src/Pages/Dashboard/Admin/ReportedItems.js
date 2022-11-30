@@ -15,11 +15,14 @@ const ReportedItems = () => {
   } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch(`https://autohaus.vercel.app/products`, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("resale-token")}`,
-        },
-      });
+      const res = await fetch(
+        `https://autohaus-ashiqur-russel.vercel.app/products`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("resale-token")}`,
+          },
+        }
+      );
       const data = await res.json();
 
       const filter = data.filter(

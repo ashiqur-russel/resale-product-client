@@ -2,9 +2,9 @@ import React from "react";
 
 const Blog = () => {
   return (
-    <div class="items-center w-full bg-white rounded-lg border shadow-md md:flex-row ">
-      <div class="flex flex-col justify-between p-4 leading-normal">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight ">
+    <div className="items-center w-full bg-white rounded-lg border shadow-md md:flex-row ">
+      <div className="flex flex-col justify-between p-4 leading-normal">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight ">
           1. What are the different ways to manage a state in a React
           application?
         </h5>
@@ -13,8 +13,8 @@ const Blog = () => {
           In React apps, there are at least seven ways to handle the state. Let
           us briefly explore a few of them in this part :
         </p>
-        <div class="mb-3 font-normal m-10">
-          <ul class="list-disc text">
+        <div className="mb-3 font-normal m-10">
+          <ul className="list-disc text">
             <p>We can use URL to store some data</p>
             <li>Filter parameters </li>
             <li>Pagination offset and limit</li>
@@ -22,22 +22,22 @@ const Blog = () => {
           </ul>
         </div>
       </div>
-      <div class="flex flex-col justify-between p-4 leading-normal">
-        <h5 class="mb-2 text-2xl font-bold ">
+      <div className="flex flex-col justify-between p-4 leading-normal">
+        <h5 className="mb-2 text-2xl font-bold ">
           How does prototypical inheritance work?
         </h5>
-        <p class="mb-3 font-norma">
+        <p className="mb-3 font-norma">
           The core idea of Prototypal Inheritance is that an object can point to
           another object and inherit all its properties. The main purpose is to
           allow multiple instances of an object to share common properties,
           hence, the Singleton Pattern.
         </p>
       </div>
-      <div class="flex flex-col justify-between p-4 leading-normal">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight">
+      <div className="flex flex-col justify-between p-4 leading-normal">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight">
           What is a unit test? Why should we write unit tests?{" "}
         </h5>
-        <p class="mb-3 font-normal text-red-400">What Is Unit Testing?</p>
+        <p className="mb-3 font-normal text-red-400">What Is Unit Testing?</p>
         <p className="p-6">
           {" "}
           A unit test is a way of testing a unit - the smallest piece of code
@@ -69,11 +69,11 @@ const Blog = () => {
           </ul>
         </p>
       </div>
-      <div class="flex flex-col justify-between p-4 leading-normal">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight">
+      <div className="flex flex-col justify-between p-4 leading-normal">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight">
           React vs. Angular vs. Vue{" "}
         </h5>
-        <p class="mb-3 font-normal">
+        <p className="mb-3 font-normal">
           <ul>
             <li>
               Unit tests save time and money. Usually, we tend to test the happy
@@ -95,10 +95,10 @@ const Blog = () => {
             </li>
           </ul>
         </p>
-        <p class="mb-3 font-normal">
+        <p className="mb-3 font-normal">
           <b className="text-bold-xl"> How can this be?</b>
         </p>
-        <p class="mb-3 font-normal">
+        <p className="mb-3 font-normal">
           There are three frameworks for building web applications that every
           frontend developer has heard about: React, Vue.js, and Angular. React
           is a UI library, Angular is a fully-fledged front-end framework, while
@@ -107,17 +107,17 @@ const Blog = () => {
         <p className="mb-1 mt-1">
           Key Differences Between Angular.Js, React.Js And Vue.Js
         </p>
-        <p class="mb-3 font-normal">
+        <p className="mb-3 font-normal">
           Speaking of architecture, Angular.js is a full-fledged MVC framework
           that provides you with all the possibilities for out-of-the-box
           programming:
         </p>
-        <p class="mb-3 font-normal">
+        <p className="mb-3 font-normal">
           React.js, on the other hand, is a library that just offers the view,
           leaving the developer to decide how to construct the Model and
           Controller.
         </p>
-        <p class="mb-3 font-normal">
+        <p className="mb-3 font-normal">
           Vue.js is a library that allows you to create interactive web
           interfaces. Vue.js is primarily concerned with the ViewModel layer of
           the MVVM architecture. It uses two-way data bindings to attach the

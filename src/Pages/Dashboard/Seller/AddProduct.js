@@ -17,14 +17,19 @@ const AddProduct = () => {
   const { data: sellerData = [] } = useQuery({
     queryKey: ["sellerData"],
     queryFn: async () => {
-      const res = await fetch(`https://autohaus.vercel.app/users`, {
-        authorization: `bearer ${localStorage.getItem("sales-token")}`,
-      });
+      const res = await fetch(
+        `https://autohaus-ashiqur-russel.vercel.app/users`,
+        {
+          authorization: `bearer ${localStorage.getItem("sales-token")}`,
+        }
+      );
       const data = await res.json();
       const filter = data.filter((user) => user.role === "seller");
       console.log(filter);
-      setisVerified(filter?.verified);
-      return filter[0]?.verified;
+
+      const filterdSeller = filter.find((data) => data.email === user?.email);
+      setisVerified(filterdSeller?.verified);
+      return filterdSeller;
     },
   });
 
@@ -42,7 +47,7 @@ const AddProduct = () => {
     const useofYear = event.target.purchase_year.value;
     const description = event.target.description.value;
     const image = event.target.image.files[0];
-    let sellerVerified = sellerData;
+    const sellerVerified = isVerified;
 
     getImageUrl(image)
       .then((data) => {
@@ -52,7 +57,6 @@ const AddProduct = () => {
           name,
           originalPrice: actual_price,
           resalePrice: resale_price,
-
           useOfTime: parseInt(useofYear),
           sellerVerified,
           description,
@@ -65,8 +69,10 @@ const AddProduct = () => {
           postDate: format(new Date(), "PP"),
         };
 
+        console.log("Product data : ", ProductData);
+
         addProduct(ProductData).then((data) => {
-          console.log(data);
+          console.log(" product data ====", data);
           toast.success("Product Added Successfully");
           navigate("/dashboard/my-products");
         });

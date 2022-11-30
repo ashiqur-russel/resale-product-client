@@ -14,7 +14,7 @@ const AdvertisedItem = () => {
   const { data: products = [] } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const url = `https://autohaus.vercel.app/addvertise`;
+      const url = `https://autohaus-ashiqur-russel.vercel.app/addvertise`;
       const res = await fetch(url);
       const data = await res.json();
       return data;
@@ -25,7 +25,7 @@ const AdvertisedItem = () => {
     console.log("clicked", id);
 
     if (user?.uid) {
-      const url = `https://autohaus.vercel.app/product/${id}`;
+      const url = `https://autohaus-ashiqur-russel.vercel.app/product/${id}`;
 
       fetch(url, {
         method: "PUT",

@@ -15,13 +15,16 @@ const AllSellers = () => {
   } = useQuery({
     queryKey: ["sellerData"],
     queryFn: async () => {
-      const res = await fetch(`https://autohaus.vercel.app/users`, {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          authorization: `bearer ${localStorage.getItem("sales-token")}`,
-        },
-      });
+      const res = await fetch(
+        `https://autohaus-ashiqur-russel.vercel.app/users`,
+        {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+            authorization: `bearer ${localStorage.getItem("sales-token")}`,
+          },
+        }
+      );
       const data = await res.json();
       const filter = data.filter(
         (user_seller) => user_seller.role === "seller"
@@ -96,7 +99,7 @@ const AllSellers = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {sellerData &&
+                  {Array.isArray(sellerData) &&
                     sellerData?.map((seller, i) => (
                       <tr key={seller._id}>
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">

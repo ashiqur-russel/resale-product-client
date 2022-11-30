@@ -48,13 +48,17 @@ const router = createBrowserRouter([
         path: "/product-details/:id",
         element: <ProductDetails></ProductDetails>,
         loader: ({ params }) =>
-          fetch(`https://autohaus.vercel.app/advertiseditem/${params.id}`),
+          fetch(
+            `https://autohaus-ashiqur-russel.vercel.app/advertiseditem/${params.id}`
+          ),
       },
 
       {
         path: "/categories/:name",
         loader: ({ params }) => {
-          return fetch(`https://autohaus.vercel.app/products/${params.name}`);
+          return fetch(
+            `https://autohaus-ashiqur-russel.vercel.app/products/${params.name}`
+          );
         },
         element: (
           <PrivateRoute>
@@ -146,7 +150,9 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/payment/:id",
         loader: ({ params }) =>
-          fetch(`https://autohaus.vercel.app/bookings/${params.id}`),
+          fetch(
+            `https://autohaus-ashiqur-russel.vercel.app/bookings/${params.id}`
+          ),
         element: (
           <PrivateRoute>
             <Payment></Payment>

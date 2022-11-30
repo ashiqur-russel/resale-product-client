@@ -80,7 +80,7 @@ const Signup = () => {
       };
 
       //   Save user in db & get token
-      fetch(`https://autohaus.vercel.app/user/${user?.email}`, {
+      fetch(`https://autohaus-ashiqur-russel.vercel.app/user/${user?.email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",

@@ -13,6 +13,7 @@ const MyProducts = () => {
   const [loading, setLoading] = useState(true);
   const [isAvailable, setIsAvailable] = useState("");
   let [isOpen, setIsOpen] = useState(false);
+  const [isVerified, setisVerified] = useState("");
 
   useEffect(() => {
     getUser(user?.email)
@@ -23,8 +24,27 @@ const MyProducts = () => {
       .catch((error) => console.log(error));
   }, [user]);
 
+  const { data: sellerData = [] } = useQuery({
+    queryKey: ["sellerData"],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://autohaus-ashiqur-russel.vercel.app/users`,
+        {
+          authorization: `bearer ${localStorage.getItem("sales-token")}`,
+        }
+      );
+      const data = await res.json();
+      const filter = data.filter((user) => user.role === "seller");
+      console.log(filter);
+
+      const filterdSeller = filter.find((data) => data.email === user?.email);
+      setisVerified(filterdSeller.verified);
+      return filterdSeller;
+    },
+  });
+
   console.log(user?.email);
-  const url = `https://autohaus.vercel.app/my-products?email=${user?.email}`;
+  const url = `https://autohaus-ashiqur-russel.vercel.app/my-products?email=${user?.email}`;
 
   const {
     data: products = [],
@@ -53,7 +73,7 @@ const MyProducts = () => {
       salesStatus: "unsold",
       picture: productData?.picture,
       location: productData?.location,
-      sellerVerified: productData?.sellerVerified,
+      sellerVerified: isVerified,
     };
 
     addAdvertise(advertiseData)
@@ -85,7 +105,6 @@ const MyProducts = () => {
       toast.success("Product Deleted");
       refetch();
     });
-    refetch();
 
     closeModal();
   };
@@ -133,45 +152,47 @@ const MyProducts = () => {
                 {products &&
                   products?.map((product) => (
                     <tr key={product._id}>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <div className="flex items-center">
-                          <div className="flex-shrink-0 w-10 h-10">
-                            <img
-                              className="w-full h-full rounded-full"
-                              src={product.picture}
-                              alt=""
-                            />
-                          </div>
-                          <div className="ml-3">
+                      {product?.location && (
+                        <>
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <div className="flex items-center">
+                              <div className="flex-shrink-0 w-10 h-10">
+                                <img
+                                  className="w-full h-full rounded-full"
+                                  src={product.picture}
+                                  alt=""
+                                />
+                              </div>
+                              <div className="ml-3">
+                                <p className="text-gray-900 whitespace-no-wrap">
+                                  {product.sellersName}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <p className="text-gray-900 whitespace-no-wrap">
-                              {product.sellersName}
+                              {product.name}
                             </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <p className="text-gray-900 whitespace-no-wrap">
-                          {product.name}
-                        </p>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <p className="text-gray-900 whitespace-no-wrap">
-                          {product.title}
-                        </p>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <p className="text-gray-900 whitespace-no-wrap">
-                          {" "}
-                          {product.resalePrice}
-                        </p>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                          {product?.availability}
-                        </span>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        {/* {product?.availability === "yes" ? (
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <p className="text-gray-900 whitespace-no-wrap">
+                              {product.title}
+                            </p>
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <p className="text-gray-900 whitespace-no-wrap">
+                              {" "}
+                              {product.resalePrice}
+                            </p>
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                              {product?.availability}
+                            </span>
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            {/* {product?.availability === "yes" ? (
                           <button
                             onClick={() => {
                               handlePublish(product);
@@ -186,53 +207,55 @@ const MyProducts = () => {
                           ""
                         )} */}
 
-                        {product?.availability === "yes" &&
-                          product?.advertised === "no" && (
+                            {product?.availability === "yes" &&
+                              product?.advertised === "no" && (
+                                <button
+                                  onClick={() => {
+                                    handlePublish(product);
+                                  }}
+                                  className="btb btn-danger bg-green-400 p-2 hover:cursor-pointer w-full"
+                                >
+                                  Publish
+                                </button>
+                              )}
+
+                            {product?.advertised === "yes" && (
+                              <button
+                                disabled
+                                className="btb btn-danger bg-gray-400 p-2 hover:cursor-pointer w-full"
+                              >
+                                Published
+                              </button>
+                            )}
+
+                            {product?.availability === "no" && (
+                              <button
+                                disabled
+                                className="btb btn-danger bg-yellow-400 p-2 hover:cursor-pointer w-full"
+                              >
+                                Sold
+                              </button>
+                            )}
+                          </td>
+
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <button
-                              onClick={() => {
-                                handlePublish(product);
-                              }}
-                              className="btb btn-danger bg-green-400 p-2 hover:cursor-pointer w-full"
+                              onClick={() => modalHandler(product?._id)}
+                              className="btb btn-danger bg-red-400 p-2 hover:cursor-pointer"
                             >
-                              Publish
+                              DELETE
                             </button>
-                          )}
 
-                        {product?.advertised === "yes" && (
-                          <button
-                            disabled
-                            className="btb btn-danger bg-green-400 p-2 hover:cursor-pointer w-full"
-                          >
-                            Publisded
-                          </button>
-                        )}
-
-                        {product?.availability === "no" && (
-                          <button
-                            disabled
-                            className="btb btn-danger bg-yellow-400 p-2 hover:cursor-pointer w-full"
-                          >
-                            Sold
-                          </button>
-                        )}
-                      </td>
-
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <button
-                          onClick={openModal}
-                          className="btb btn-danger bg-red-400 p-2 hover:cursor-pointer"
-                        >
-                          DELETE
-                        </button>
-
-                        <DeleteModal
+                            {/*     <DeleteModal
                           openModal={openModal}
                           isOpen={isOpen}
                           closeModal={closeModal}
                           modalHandler={modalHandler}
                           id={product?._id}
-                        ></DeleteModal>
-                      </td>
+                        ></DeleteModal> */}
+                          </td>
+                        </>
+                      )}
                     </tr>
                   ))}
               </tbody>

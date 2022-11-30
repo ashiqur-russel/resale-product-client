@@ -7,7 +7,7 @@ const AddProductForm = ({ handleSubmit }) => {
   const [condition, setCondition] = useState("");
   const [categories, setCategoried] = useState([]);
   useEffect(() => {
-    fetch("https://autohaus.vercel.app/categories")
+    fetch("https://autohaus-ashiqur-russel.vercel.app/categories")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

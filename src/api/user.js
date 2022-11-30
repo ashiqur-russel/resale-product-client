@@ -1,6 +1,6 @@
 //Get user role
 export const getRole = async (email) => {
-  const url = `https://autohaus.vercel.app/user/${email}`;
+  const url = `https://autohaus-ashiqur-russel.vercel.app/user/${email}`;
 
   const response = await fetch(url);
 
@@ -11,7 +11,7 @@ export const getRole = async (email) => {
 
 //Get all user
 export const getAllUser = async () => {
-  const url = `https://autohaus.vercel.app/users`;
+  const url = `https://autohaus-ashiqur-russel.vercel.app/users`;
 
   const response = await fetch(url, {
     method: "GET",
@@ -28,7 +28,7 @@ export const getAllUser = async () => {
 
 //get user by email
 export const getUser = async (email) => {
-  const url = `https://autohaus.vercel.app/user/${email}`;
+  const url = `https://autohaus-ashiqur-russel.vercel.app/user/${email}`;
 
   const response = await fetch(url, {
     method: "GET",
@@ -45,7 +45,7 @@ export const getUser = async (email) => {
 
 //Get user role
 export const getVerifiedStatus = async (email) => {
-  const url = `https://autohaus.vercel.app/user/${email}`;
+  const url = `https://autohaus-ashiqur-russel.vercel.app/user/${email}`;
 
   const response = await fetch(url, {
     method: "GET",
@@ -63,8 +63,8 @@ export const getVerifiedStatus = async (email) => {
 //Verify Seller
 
 export const verifySeller = async (user) => {
-  delete user._id;
-  const url = `https://autohaus.vercel.app/user/${user?.email}`;
+  delete user?._id;
+  const url = `https://autohaus-ashiqur-russel.vercel.app/user/${user?.email}`;
 
   const response = await fetch(url, {
     method: "PUT",
@@ -81,7 +81,7 @@ export const verifySeller = async (user) => {
 
 //delete user
 export const deleteUserByEmail = async (email) => {
-  const url = `https://autohaus.vercel.app/user?email=${email}`;
+  const url = `https://autohaus-ashiqur-russel.vercel.app/user?email=${email}`;
   const response = await fetch(url, {
     method: "DELETE",
     headers: {
