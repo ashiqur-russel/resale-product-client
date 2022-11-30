@@ -64,7 +64,7 @@ export const getVerifiedStatus = async (email) => {
 
 export const verifySeller = async (user) => {
   delete user?._id;
-  const url = `https://autohaus-ashiqur-russel.vercel.app/user/${user?.email}`;
+  const url = `https://autohaus-ashiqur-russel.vercel.app/users/${user?.email}`;
 
   const response = await fetch(url, {
     method: "PUT",
