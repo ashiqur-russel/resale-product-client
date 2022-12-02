@@ -1,6 +1,6 @@
 ## Project Name
 
-Auto Haus - A use car Resale Website
+Auto Haus - A used car Resale Website
 
 Live Website: https://auto-kaufen.web.app/
 
