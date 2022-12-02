@@ -8,7 +8,7 @@ A web application for an Where people can Post their used car to resale and buy 
 
 ## Project Status
 
-This project is provided by Programming hero as an assignment as a Final Assaignment.
+This project still undergoing on development.There are lot of places to improvemnet.
 
 ## For Admin Access
 
