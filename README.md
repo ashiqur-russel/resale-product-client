@@ -4,7 +4,7 @@ Auto Haus - A used car Resale Website
 
 Live Website: https://auto-kaufen.web.app/
 
-A web application for an Where people can Post their used car to resale and buy from there.This website built with React, Firebase, Experess & Mongodb.
+A web application Where people can Post their used car to sell and buy from there.This website built with React, Firebase, Experess & Mongodb.
 
 ## Project Status
 
