@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { deleteUserByEmail, getAllUser, verifySeller } from "../../../api/user";
 import DeleteModal from "../../../components/Modal/UserDeleteModal";
-import SmallSpinner from "../../../components/spinner/Spinner";
+import SmallSpinner from "../../../components/spinner/spinner.js";
 
 const AllSellers = () => {
   let [isOpen, setIsOpen] = useState(false);
@@ -16,7 +16,7 @@ const AllSellers = () => {
     queryKey: ["sellerData"],
     queryFn: async () => {
       const res = await fetch(
-        `https://autohaus-ashiqur-russel.vercel.app/users`,
+        `${process.env.REACT_APP_API_LOCAL_url}/users`,
         {
           method: "GET",
           headers: {

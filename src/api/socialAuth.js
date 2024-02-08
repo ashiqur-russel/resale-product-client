@@ -6,7 +6,7 @@ const setAuthTokenSocial = (user, uid) => {
   };
 
   //   Save user in db & get token
-  fetch(`https://autohaus-ashiqur-russel.vercel.app/user/${user?.email}`, {
+  fetch(`${process.env.REACT_APP_API_LOCAL_url}/user/${user?.email}`, {
     method: "PUT",
     headers: {
       "content-type": "application/json",

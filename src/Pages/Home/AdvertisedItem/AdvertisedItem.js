@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/Authprovider";
 import { getVerifiedStatus } from "../../../api/user";
 import toast from "react-hot-toast";
-import SmallSpinner from "../../../components/spinner/Spinner";
+import SmallSpinner from "../../../components/spinner/spinner.js";
 
 const AdvertisedItem = () => {
   const { loading, user } = useContext(AuthContext);
@@ -14,7 +14,7 @@ const AdvertisedItem = () => {
   const { data: products = [] } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const url = `https://autohaus-ashiqur-russel.vercel.app/addvertise`;
+      const url = `${process.env.REACT_APP_API_LOCAL_url}/addvertise`;
       const res = await fetch(url);
       const data = await res.json();
       return data;
@@ -25,7 +25,7 @@ const AdvertisedItem = () => {
     console.log("clicked", id);
 
     if (user?.uid) {
-      const url = `https://autohaus-ashiqur-russel.vercel.app/product/${id}`;
+      const url = `${process.env.REACT_APP_API_LOCAL_url}/product/${id}`;
 
       fetch(url, {
         method: "PUT",

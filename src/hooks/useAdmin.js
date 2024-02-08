@@ -5,7 +5,7 @@ const useAdmin = (email) => {
   const [isAdminLoading, setIsAdminLoading] = useState(true);
   useEffect(() => {
     if (email) {
-      fetch(`https://autohaus-ashiqur-russel.vercel.app/users/admin/${email}`)
+      fetch(`${process.env.REACT_APP_API_LOCAL_url}/users/admin/${email}`)
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

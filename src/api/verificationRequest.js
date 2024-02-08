@@ -1,5 +1,5 @@
 export const verificationRequest = async (verificationData) => {
-  const url = `https://autohaus-ashiqur-russel.vercel.app/user/${verificationData?.email}`;
+  const url = `${process.env.REACT_APP_API_LOCAL_url}/user/${verificationData?.email}`;
 
   const response = await fetch(url, {
     method: "PUT",

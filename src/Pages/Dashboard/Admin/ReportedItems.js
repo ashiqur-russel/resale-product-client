@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import SmallSpinner from "../../../components/spinner/Spinner";
+import SmallSpinner from "../../../components/spinner/spinner.js";
 import { deleteProduct } from "../../../api/product";
 import toast from "react-hot-toast";
 import DeleteModal from "../../../components/Modal/DeleteModal";
@@ -16,7 +16,7 @@ const ReportedItems = () => {
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(
-        `https://autohaus-ashiqur-russel.vercel.app/products`,
+        `${process.env.REACT_APP_API_LOCAL_url}/products`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("resale-token")}`,

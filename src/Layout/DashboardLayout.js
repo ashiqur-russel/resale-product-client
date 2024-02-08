@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { getRole } from "../api/user";
 import Sidebar from "../components/Dashbaord/Sidebar/Sidebar";
-import SmallSpinner from "../components/spinner/Spinner";
+import SmallSpinner from "../components/spinner/spinner.js";
 import { AuthContext } from "../contexts/Authprovider";
 
 const DashboardLayout = () => {

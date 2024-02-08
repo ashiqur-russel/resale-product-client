@@ -25,7 +25,7 @@ const Checkout = ({ bookingData }) => {
   const elements = useElements();
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("https://autohaus-ashiqur-russel.vercel.app/create-payment-intent", {
+    fetch(`${process.env.REACT_APP_API_LOCAL_url}/create-payment-intent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -97,7 +97,7 @@ const Checkout = ({ bookingData }) => {
         bookingId: _id,
       };
 
-      fetch("https://autohaus-ashiqur-russel.vercel.app/payments", {
+      fetch("${process.env.REACT_APP_API_LOCAL_url}/payments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

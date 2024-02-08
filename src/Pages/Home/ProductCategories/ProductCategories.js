@@ -7,7 +7,7 @@ const ProductCategories = () => {
   const [carCategories, setCarCategories] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch("https://autohaus-ashiqur-russel.vercel.app/categories")
+    fetch(`${process.env.REACT_APP_API_LOCAL_url}/categories`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
