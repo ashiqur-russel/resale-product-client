@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../contexts/Authprovider";
 import setAuthToken from "../../../api/auth";
-import SmallSpinner from "../../../components/spinner/Spinner";
+import SmallSpinner from "../../../components/spinner/spinner.js";
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
   const { signin, resetPassword, loading, setLoading, signInWithGoogle } =

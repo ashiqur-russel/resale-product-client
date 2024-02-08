@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { deleteUserByEmail } from "../../../api/user";
 import toast from "react-hot-toast";
-import SmallSpinner from "../../../components/spinner/Spinner";
+import SmallSpinner from "../../../components/spinner/spinner.js";
 import DeleteModal from "../../../components/Modal/UserDeleteModal";
 
 const AllBuyers = () => {
@@ -15,7 +15,7 @@ const AllBuyers = () => {
     queryKey: ["buyerData"],
     queryFn: async () => {
       const res = await fetch(
-        `https://autohaus-ashiqur-russel.vercel.app/users`,
+        `${process.env.REACT_APP_API_LOCAL_url}/users`,
         {
           method: "GET",
           headers: {

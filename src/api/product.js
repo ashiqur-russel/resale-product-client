@@ -1,5 +1,5 @@
 const addProducts = async (porductData) => {
-  const url = `https://autohaus-ashiqur-russel.vercel.app/products/`;
+  const url = `${process.env.REACT_APP_API_LOCAL_url}/products/`;
 
   const response = await fetch(url, {
     method: "POST",
@@ -15,7 +15,7 @@ const addProducts = async (porductData) => {
 };
 
 export const getAllProductsByMail = async (email) => {
-  const url = `https://autohaus-ashiqur-russel.vercel.app/products?email=${email}`;
+  const url = `${process.env.REACT_APP_API_LOCAL_url}/products?email=${email}`;
 
   const response = await fetch(url, {
     method: "GET",
@@ -34,7 +34,7 @@ export default addProducts;
 //update product
 
 export const updateDisplayAdvertise = async (data) => {
-  const url = `https://autohaus-ashiqur-russel.vercel.app/publish/${data?._id}`;
+  const url = `${process.env.REACT_APP_API_LOCAL_url}/publish/${data?._id}`;
   delete data?._id;
   const response = await fetch(url, {
     method: "PUT",
@@ -53,7 +53,7 @@ export const updateDisplayAdvertise = async (data) => {
 //delete product
 
 export const deleteProduct = async (id) => {
-  const url = `https://autohaus-ashiqur-russel.vercel.app/product/${id}`;
+  const url = `${process.env.REACT_APP_API_LOCAL_url}/product/${id}`;
   const response = await fetch(url, {
     method: "DELETE",
     headers: {

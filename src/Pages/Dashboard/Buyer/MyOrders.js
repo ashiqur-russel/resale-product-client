@@ -2,13 +2,13 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../../contexts/Authprovider";
 //import axios, * as others from "axios";
 import { useQuery } from "@tanstack/react-query";
-import SmallSpinner from "../../../components/spinner/Spinner";
+import SmallSpinner from "../../../components/spinner/spinner.js";
 import { Link } from "react-router-dom";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `https://autohaus-ashiqur-russel.vercel.app/bookings?email=${user?.email}`;
+  const url = `${process.env.REACT_APP_API_LOCAL_url}/bookings?email=${user?.email}`;
 
   const { data: orders = [], isLoading } = useQuery({
     queryKey: ["orders", user?.email],

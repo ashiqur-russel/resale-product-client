@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../contexts/Authprovider";
-import SmallSpinner from "../../../components/spinner/Spinner";
+import SmallSpinner from "../../../components/spinner/spinner.js";
 import { getUser } from "../../../api/user";
 import { addAdvertise } from "../../../api/advertise";
 import toast from "react-hot-toast";
@@ -28,7 +28,7 @@ const MyProducts = () => {
     queryKey: ["sellerData"],
     queryFn: async () => {
       const res = await fetch(
-        `https://autohaus-ashiqur-russel.vercel.app/users`,
+        `${process.env.REACT_APP_API_LOCAL_url}/users`,
         {
           authorization: `bearer ${localStorage.getItem("sales-token")}`,
         }
@@ -44,7 +44,7 @@ const MyProducts = () => {
   });
 
   console.log(user?.email);
-  const url = `https://autohaus-ashiqur-russel.vercel.app/my-products?email=${user?.email}`;
+  const url = `${process.env.REACT_APP_API_LOCAL_url}/my-products?email=${user?.email}`;
 
   const {
     data: products = [],

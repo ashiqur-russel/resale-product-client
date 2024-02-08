@@ -11,7 +11,7 @@ const Welcome = () => {
   useEffect(() => {
     axios
       .get(
-        `https://autohaus-ashiqur-russel.vercel.app/users?email=${user?.email}`,
+        `${process.env.REACT_APP_API_LOCAL_url}/users?email=${user?.email}`,
         {
           method: "GET",
           headers: {

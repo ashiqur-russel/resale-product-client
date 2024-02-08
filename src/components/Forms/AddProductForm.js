@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../contexts/Authprovider";
-import SmallSpinner from "../spinner/Spinner";
+import SmallSpinner from "../spinner/spinner.js";
 const AddProductForm = ({ handleSubmit }) => {
   const { loading } = useContext(AuthContext);
 
   const [condition, setCondition] = useState("");
   const [categories, setCategoried] = useState([]);
   useEffect(() => {
-    fetch("https://autohaus-ashiqur-russel.vercel.app/categories")
+    fetch(`${process.env.REACT_APP_API_LOCAL_url}/categories`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

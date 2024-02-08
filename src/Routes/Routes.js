@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         element: <ProductDetails></ProductDetails>,
         loader: ({ params }) =>
           fetch(
-            `https://autohaus-ashiqur-russel.vercel.app/advertiseditem/${params.id}`
+            `${process.env.REACT_APP_API_LOCAL_url}/advertiseditem/${params.id}`
           ),
       },
 
@@ -57,7 +57,7 @@ const router = createBrowserRouter([
         path: "/categories/:name",
         loader: ({ params }) => {
           return fetch(
-            `https://autohaus-ashiqur-russel.vercel.app/products/${params.name}`
+            `${process.env.REACT_APP_API_LOCAL_url}/products/${params.name}`
           );
         },
         element: (
@@ -151,7 +151,7 @@ const router = createBrowserRouter([
         path: "/dashboard/payment/:id",
         loader: ({ params }) =>
           fetch(
-            `https://autohaus-ashiqur-russel.vercel.app/bookings/${params.id}`
+            `${process.env.REACT_APP_API_LOCAL_url}/bookings/${params.id}`
           ),
         element: (
           <PrivateRoute>

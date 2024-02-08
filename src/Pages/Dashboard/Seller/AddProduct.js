@@ -18,7 +18,7 @@ const AddProduct = () => {
     queryKey: ["sellerData"],
     queryFn: async () => {
       const res = await fetch(
-        `https://autohaus-ashiqur-russel.vercel.app/users`,
+        `${process.env.REACT_APP_API_LOCAL_url}/users`,
         {
           authorization: `bearer ${localStorage.getItem("sales-token")}`,
         }
