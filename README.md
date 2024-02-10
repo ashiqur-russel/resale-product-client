@@ -36,12 +36,92 @@ adminPassword: 123456
 
 ## Installation and Setup Instructions
 
-Clone down this repository. You will need `node` and `npm` installed globally on your machine.
+# Resale Product App
 
-Installation:
+This guide will help you set up the project locally on your machine.
 
-`npm install`
+## Prerequisites
 
-To Start Server:
+Before you begin, ensure you have the following installed:
+- Git
+- Node.js and npm
 
-`npm start`
+## Getting Started
+
+Follow these steps to get your development environment set up:
+
+1. Clone the repository
+
+First, clone the project repository to your local machine using Git:
+
+
+git clone <repository-url>
+
+2. **Install dependencies**
+Navigate to the project directory and install the required npm packages:
+
+ - `cd resale-product`
+ - `npm install`
+
+
+3. **Environment Setup**
+
+After installing the packages, you need to set up environment variables for the app to function correctly:
+
+- Create a `.env` file in the root directory of the project (where the `package.json` file is located).
+
+- Add the following environment variables to the `.env` file:
+
+  ```
+  REACT_APP_API_TEST_url=
+  REACT_APP_API_LOCAL_url=http://localhost:8626
+  REACT_APP_apikey=
+  REACT_APP_authDomain=auto-kaufen.firebaseapp.com
+  REACT_APP_projectId=
+  REACT_APP_storageBucket=
+  REACT_APP_messagingSenderId=
+  REACT_APP_appId=
+  ```
+
+- Fill in the missing values as needed. For the Firebase variables (`REACT_APP_apikey`, `REACT_APP_authDomain`, `REACT_APP_projectId`, `REACT_APP_storageBucket`, `REACT_APP_messagingSenderId`, `REACT_APP_appId`), you'll need to create a Firebase app and obtain the Firebase authentication config data from there.
+
+4. **Firebase Configuration**
+
+- If you haven't already, create a Firebase project to get your Firebase configuration. This involves:
+  - Going to the Firebase Console.
+  - Creating a new project (or selecting an existing one).
+  - Navigating to the project settings to find your app's Firebase configuration.
+
+- Copy the Firebase configuration data and paste it into the corresponding environment variables in your `.env` file.
+
+### Important Reminder
+
+Ensure that your `.env` file is listed in the `.gitignore` file to prevent committing sensitive information to your Git repository by mistake.
+
+### Running the App
+
+Once the setup is complete, you can start the development server by running:
+
+
+
+4. **Firebase Configuration**
+
+If you haven't already, create a Firebase project to get your Firebase configuration. This involves:
+
+- Go to the Firebase Console.
+- Create a new project (or selecting an existing one).
+- Navigate to the project settings to find your app's Firebase configuration.
+- Copy the Firebase configuration data and paste it into the corresponding environment variables in your .env file.
+
+## Important Reminder
+
+Ensure that your .env file is listed in the .gitignore file to prevent committing sensitive information to your Git repository by mistake.
+
+## Running the App
+
+Once the setup is complete, you can start the development server by running:
+
+ - `npm start`
+
+This will run the app in development mode. Open `http://localhost:3000` to view it in your browser.
+
