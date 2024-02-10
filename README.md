@@ -60,7 +60,7 @@ git clone <repository-url>
 2. **Install dependencies**
 Navigate to the project directory and install the required npm packages:
 
- - `cd resale-product`
+ - `cd resale-produc-client`
  - `npm install`
 
 
@@ -87,10 +87,10 @@ After installing the packages, you need to set up environment variables for the 
 
 4. **Firebase Configuration**
 
-- If you haven't already, create a Firebase project to get your Firebase configuration. This involves:
-  - Going to the Firebase Console.
-  - Creating a new project (or selecting an existing one).
-  - Navigating to the project settings to find your app's Firebase configuration.
+ If you haven't already, create a Firebase project to get your Firebase configuration. This involves:
+  - Go to the Firebase Console.
+  - Create a new project (or selecting an existing one).
+  - Navigate to the project settings to find your app's Firebase configuration.
 
 - Copy the Firebase configuration data and paste it into the corresponding environment variables in your `.env` file.
 
@@ -102,26 +102,8 @@ Ensure that your `.env` file is listed in the `.gitignore` file to prevent commi
 
 Once the setup is complete, you can start the development server by running:
 
-
-
-4. **Firebase Configuration**
-
-If you haven't already, create a Firebase project to get your Firebase configuration. This involves:
-
-- Go to the Firebase Console.
-- Create a new project (or selecting an existing one).
-- Navigate to the project settings to find your app's Firebase configuration.
-- Copy the Firebase configuration data and paste it into the corresponding environment variables in your .env file.
-
-## Important Reminder
-
-Ensure that your .env file is listed in the .gitignore file to prevent committing sensitive information to your Git repository by mistake.
-
-## Running the App
-
-Once the setup is complete, you can start the development server by running:
-
  - `npm start`
 
 This will run the app in development mode. Open `http://localhost:3000` to view it in your browser.
+
 
